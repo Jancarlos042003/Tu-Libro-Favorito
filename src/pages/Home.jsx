@@ -1,7 +1,4 @@
-import Banner from '../components/Banner'
 import BannerCarousel from '../components/carousel/BannerCarousel';
-import Footer from '../components/footer/Footer';
-import Header from '../components/header/Header';
 import SectionBooks from '../components/recommendations/SectionBooks';
 
 const Home = () => {
@@ -21,14 +18,12 @@ const Home = () => {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <Header />
             <main className="flex-grow">
                 <BannerCarousel />
                 <div className='container mx-auto'>
                     <SectionBooks text={"LOS MÁS VENDIDOS"} books={books} />
                 </div>
             </main>
-            <Footer />
         </div>
     );
 };
