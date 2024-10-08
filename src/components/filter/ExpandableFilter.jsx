@@ -1,6 +1,6 @@
 import { useState } from "react"
 import CheckboxFilter from "./CheckboxFilter"
-import View from "./view"
+import View from "./View"
 
 const ExpandableFilter = ({title, options, initiallyVisible = 5}) => {
     const[isExpanded, setIsExpanded] = useState(false)
