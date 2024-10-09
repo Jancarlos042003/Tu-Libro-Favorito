@@ -59,7 +59,7 @@ const ReviewForm = ({reviews, setReviews}) => {
                         </textarea>
                     </label>
 
-                    <SendButton />
+                    <SendButton text="Publicar Reseña" />
                 </form>
             </section>
         </>
