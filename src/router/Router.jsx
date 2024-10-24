@@ -5,6 +5,7 @@ import Detail from "../pages/Detail"
 import App from "../components/templates/App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Sidebar from "../components/sidebar/Sidebar";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
     {
         path: "/registro",
         element: <Register />,
+        errorElement:<Error404/>,
+    },
+    {
+        path: "/sidebar",
+        element: <Sidebar />,
         errorElement:<Error404/>,
     }
 ])
