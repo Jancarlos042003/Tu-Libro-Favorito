@@ -4,6 +4,7 @@ import Input from "../input/Input";
 import { UserRoundPlus, BookPlus } from "lucide-react"
 import TextArea from "../textArea/TextArea";
 import SendButton from "../review/SendButtom";
+import AuthorInputs from "../input/AuthorInputs";
 
 const CreateBook = () => {
     return (
@@ -15,13 +16,7 @@ const CreateBook = () => {
                         <Input titulo={"Título"} tipo={"text"} placeholder={"Ingrese el título del libro"} />
                     </div>
                     
-                    <div className="space-y-2">
-                        <Input titulo={"Autor(es)"} tipo={"text"} placeholder={"Ingrese el autor del libro"} />
-                        <div className="flex space-x-2">
-                            <AddButton palabra={"Autor"} />
-                            <CreateButton Icon={UserRoundPlus} palabra={"Autor"} />
-                        </div>
-                    </div>
+                    <AuthorInputs />
 
                     <div className="space-y-2">
                         <Input titulo={"Fecha de Publicación"} tipo={"date"} />
