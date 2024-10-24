@@ -1,12 +1,12 @@
 import { CirclePlus } from "lucide-react"
 
-const AddBook = () => {
+const AddButton = ({palabra}) => {
     return(
         <button className="flex bg-black w-auto rounded-lg justify-center items-center gap-1 py-2 px-3 hover:bg-neutral-800 mt-1">
-            <CirclePlus />
-            <span className="md:flex hidden">Agregar Libro</span>
+            <CirclePlus size={20} />
+            <span className="md:flex hidden">Agregar {palabra}</span>
         </button>
     )
 }
 
-export default AddBook
+export default AddButton

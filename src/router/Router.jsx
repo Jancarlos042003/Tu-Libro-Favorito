@@ -5,8 +5,9 @@ import Detail from "../pages/Detail"
 import App from "../components/templates/App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Sidebar from "../components/sidebar/Sidebar";
 import AdminHome from "../pages/AdminHome"
+import CreateBook from "../components/form/CreateBook";
+import Admin from "../components/templates/Admin";
 
 const router = createBrowserRouter([
     {
@@ -36,9 +37,24 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        element: <AdminHome />,
-        errorElement:<Error404/>,
-    }
+        element: <Admin />,
+        errorElement: <Error404 />,
+        children: [
+            {
+                index: true,
+                element: <AdminHome />,
+            },
+            {
+                path: "libros",
+                element: <AdminHome />,
+            },
+            {
+                path: "detalles",
+                element: <CreateBook />,
+            },
+        ],
+    },
+    
 ])
 
 export default router;
