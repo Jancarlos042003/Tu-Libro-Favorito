@@ -1,9 +1,8 @@
 import AddButton from "../buttons/AddButton";
-import CreateButton from "../buttons/CreateButton";
-import { UserRoundPlus } from "lucide-react"
 import Input from "../input/Input";
 import { useState } from "react";
 import Close from "../buttons/Close";
+import CreateAuthorModal from "../modal/CreateAuthorModal";
 
 const AuthorInputs = () => {
     const [authors, setAuthors] = useState(['']); // Iniciamos con un input vacío
@@ -43,7 +42,7 @@ const AuthorInputs = () => {
             ))}
             <div className="flex space-x-2">
                 <AddButton palabra="Autor" onClick={handleAddAuthor} />
-                <CreateButton Icon={UserRoundPlus} palabra={"Autor"} />
+                <CreateAuthorModal />
             </div>
         </div>
     );

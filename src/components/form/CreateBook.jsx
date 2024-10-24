@@ -1,7 +1,6 @@
-import AddButton from "../buttons/AddButton";
 import CreateButton from "../buttons/CreateButton";
 import Input from "../input/Input";
-import { UserRoundPlus, BookPlus } from "lucide-react"
+import { BookPlus } from "lucide-react"
 import TextArea from "../textArea/TextArea";
 import SendButton from "../review/SendButtom";
 import AuthorInputs from "../input/AuthorInputs";
@@ -34,7 +33,7 @@ const CreateBook = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-700" htmlFor="precio">
+                        <label className="text-base font-medium text-gray-700" htmlFor="precio">
                             Precio
                         </label>
                         <input 
@@ -43,12 +42,13 @@ const CreateBook = () => {
                             min="0" 
                             step="0.01" 
                             placeholder="0.00"
+                            required
                             className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors"
                         />
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-700" htmlFor="descuento">
+                        <label className="text-base font-medium text-gray-700" htmlFor="descuento">
                             Descuento (%)
                         </label>
                         <input 
@@ -57,6 +57,7 @@ const CreateBook = () => {
                             min="0" 
                             max="100" 
                             placeholder="0"
+                            required
                             className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors"
                         />
                     </div>
