@@ -28,7 +28,7 @@ const AuthorInputs = () => {
                 <div key={index} className="flex items-center gap-2">
                     <div className="flex-1">
                         <Input
-                        titulo={index === 0 ? "Autor(es)" : ""}
+                        titulo={index === 0 ? "Autor" : ""}
                         tipo="text"
                         placeholder="Ingrese el autor del libro"
                         value={author}
@@ -40,10 +40,6 @@ const AuthorInputs = () => {
                     )}
                 </div>
             ))}
-            <div className="flex space-x-2">
-                <AddButton palabra="Autor" onClick={handleAddAuthor} />
-                <CreateAuthorModal />
-            </div>
         </div>
     );
 }
