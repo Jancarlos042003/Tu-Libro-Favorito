@@ -1,6 +1,6 @@
-const Input = ({titulo, tipo, placeholder, value="", onChange, disabled }) => {
+const Input = ({titulo, tipo, placeholder="", value="", onChange, disabled }) => {
     return(
-        <label className="text-sm font-medium text-gray-700">
+        <label className="text-sm font-medium text-black">
             <span className="text-base">{titulo}</span>
             <input
             type={tipo}

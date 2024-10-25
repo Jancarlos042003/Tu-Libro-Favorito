@@ -89,11 +89,16 @@ const CreateBook = () => {
                     <AuthorInputs />
 
                     <div className="space-y-2">
-                        <Input titulo={"Fecha de Publicación"} tipo={"date"} />
+                        <label>
+                            <span className='text-black'>Fecha de Publicación</span>
+                            <input 
+                            className="text-black text-base w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:ring-black focus:border-black disabled:bg-gray-100"
+                            type="date" />
+                        </label>
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-base font-medium text-gray-700">
+                        <label className="text-base font-medium text-black">
                             Editorial
                             <select 
                                 className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors appearance-none bg-white"
@@ -110,7 +115,7 @@ const CreateBook = () => {
                     </div>
 
                     <div className="space-y-2 md:col-span-2">
-                        <label className="text-base font-medium text-gray-700">
+                        <label className="text-base font-medium text-black">
                             Categorías
                             <select 
                                 className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors appearance-none bg-white"
@@ -149,7 +154,7 @@ const CreateBook = () => {
                     </div>
 
                     <div className="space-y-2 md:col-span-2">
-                        <label className="text-base font-medium text-gray-700">
+                        <label className="text-base font-medium text-black">
                             Subcategorías
                             <select 
                                 className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors appearance-none bg-white"
@@ -192,7 +197,7 @@ const CreateBook = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-base font-medium text-gray-700" htmlFor="precio">
+                        <label className="text-base font-medium text-black" htmlFor="precio">
                             Precio
                             <input 
                                 id="precio" 
@@ -207,7 +212,7 @@ const CreateBook = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-base font-medium text-gray-700" htmlFor="descuento">
+                        <label className="text-base font-medium text-black" htmlFor="descuento">
                             Descuento (%)
                             <input 
                                 id="descuento" 
