@@ -1,7 +1,7 @@
 import Close from "../buttons/Close";
 import AddButton from "../buttons/AddButton";
 
-const CategoryInputs = ({ title, items, setItems, disabled, availableOptions }) => {
+const CategoryInputs = ({ title, items, setItems, disabled, availableOptions = [] }) => {
     const addItem = () => {
         setItems([...items, '']);
     };
@@ -32,7 +32,7 @@ const CategoryInputs = ({ title, items, setItems, disabled, availableOptions }) 
                             <option value="">Seleccione una opción</option>
                             {availableOptions.map((option) => (
                                 <option key={option.id} value={option.id}>
-                                    {option.nombre}
+                                    <span className="text-black">{option.nombre}</span>
                                 </option>
                             ))}
                         </select>
@@ -49,6 +49,7 @@ const CategoryInputs = ({ title, items, setItems, disabled, availableOptions }) 
         </div>
     );
 };
+
 
 
 export default CategoryInputs

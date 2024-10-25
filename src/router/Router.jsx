@@ -6,8 +6,8 @@ import App from "../components/templates/App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AdminHome from "../pages/AdminHome"
-import CreateBook from "../components/form/CreateBook";
 import Admin from "../components/templates/Admin";
+import Delete from "../pages/Delete";
 
 const router = createBrowserRouter([
     {
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "detalles",
-                element: <CreateBook />,
+                element: <Delete />,
             },
         ],
     },
