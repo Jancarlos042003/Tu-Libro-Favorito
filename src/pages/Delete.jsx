@@ -1,4 +1,4 @@
-import EditBook from "../components/form/EditBook"
+import Inventory from "./Inventory";
 
 const Delete = () => {
     const exampleBook = {
@@ -18,7 +18,7 @@ const Delete = () => {
         subcategorias: ["Categoria 1", "Categoria 2"]
     };
     return(
-        <EditBook book={exampleBook} />
+        <Inventory />
     )
 } 
 
