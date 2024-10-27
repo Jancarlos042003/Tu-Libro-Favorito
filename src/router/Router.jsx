@@ -56,7 +56,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/admin/detalles/:id",
-                element: <EditBook />,
+                element: <CreateBook />,
             }
         ],
     },
