@@ -8,14 +8,12 @@ import axios from 'axios';
 import { API_URL } from '../../../env';
 import { token } from '../../helpers/auth';
 import Loader from '../atoms/Loader';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CreateBook = () => {
-    // EDITAR
-    const [isEditing, setIsEditing] = useState(false);
-    const handleEditClick = () => {
-        setIsEditing(true);
-    };
+
+    // REDIRECCIONAMIENTO
+    const nav = useNavigate()
 
     // PARAMS
     const params = useParams() // Obtener los parámetros de la URL
@@ -46,6 +44,26 @@ const CreateBook = () => {
                 })
         }
     }, [])
+
+    // EDITAR
+    const [isEditing, setIsEditing] = useState(false);
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
+    // ELIMINAR PRODUCTO
+    const eliminarProducto = (prod) => {
+        if(window.confirm("Estás seguro de eliminar?")){
+            axios
+            .delete(`${API_URL}/api/libro/${prod.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token()}`
+                }
+            }).then(
+                nav("/admin")
+            )
+        }
+    }
 
     // CANCELAR ACTUALIZACIÓN
     const handleCancelClick = () => {
@@ -170,6 +188,7 @@ const CreateBook = () => {
             })
             .then(() => {
                 alert("Libro actualizado exitosamente.")
+                setIsEditing(false  )
             })
             .catch((error) => {
                 console.error('Error completo:', error);
