@@ -1,10 +1,36 @@
 import Input from "../input/Input";
-import { FilePenLine } from "lucide-react"
+import { FilePenLine, Trash2 } from "lucide-react"
 import TextArea from "../textArea/TextArea";
 import { useState, useEffect } from "react";
 import CategorySelector from "./CategorySelector";
+import axios from "axios";
+import { API_URL } from "../../../env";
+import { token } from "../../helpers/auth";
+import { useParams } from "react-router-dom";
 
-const EditBook = ({ book }) => {
+const EditBook = () => {
+
+    const params = useParams()
+    const [producto, setProducto] = useState()
+    const [error, setError] = useState()
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (params.id) {
+            setLoading(false)
+            axios
+                .get(`${API_URL}/api/libro/${params.id}`)
+                .then((resp) => {
+                    setProducto(resp.data)
+                })
+                .catch((error) => {
+                    setError(error)
+                })
+                .finally(() => {
+                    setLoading(false)
+                })
+        }
+    }, [])
     
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
@@ -26,25 +52,25 @@ const EditBook = ({ book }) => {
 
     // Actualizar el formData cuando se proporciona un libro
     useEffect(() => {
-        if (book) {
+        if (producto) {
             setFormData({
-                titulo: book.titulo || "",
-                isbn: book.isbn || "",
-                precio: book.precio || 0,
-                descuento: book.descuento || 0,
-                descripcion: book.descripcion || "",
-                resumen: book.resumen || "",
-                vistaPrevia: book.vistaPrevia || "",
-                imagenPortada: book.imagenPortada || "",
-                imagenSubportada: book.imagenSubportada || "",
-                fechaPublicacion: book.fechaPublicacion || "",
-                autores: book.autor || [],
-                editorial: book.editorial || "",
-                categorias: book.categorias || [],
-                subcategorias: book.subcategorias || []
+                titulo: producto.titulo || "",
+                isbn: producto.isbn || "",
+                precio: producto.precio || 0,
+                descuento: producto.descuento || 0,
+                descripcion: producto.descripcion || "",
+                resumen: producto.resumen || "",
+                vistaPrevia: producto.vistaPrevia || "",
+                imagenPortada: producto.imagenPortada || "",
+                imagenSubportada: producto.imagenSubportada || "",
+                fechaPublicacion: producto.fechaPublicacion || "",
+                autores: producto.autor || [],
+                editorial: producto.editorial || "",
+                categorias: producto.categorias || [],
+                subcategorias: producto.subcategorias || []
             });
         }
-    }, [book]);
+    }, [producto]);
 
     const handleInputChange = (e, field) => {
         setFormData({
@@ -61,20 +87,20 @@ const EditBook = ({ book }) => {
         // Restauramos los valores originales del libro y desactivamos el modo de edición
         setIsEditing(false);
         setFormData({
-            titulo: book.titulo || "",
-            isbn: book.isbn || "",
-            precio: book.precio || 0,
-            descuento: book.descuento || 0,
-            descripcion: book.descripcion || "",
-            resumen: book.resumen || "",
-            vistaPrevia: book.vistaPrevia || "",
-            imagenPortada: book.imagenPortada || "",
-            imagenSubportada: book.imagenSubportada || "",
-            fechaPublicacion: book.fechaPublicacion || "",
-            autores: book.autor || [],
-            editorial: book.editorial || "",
-            categorias: book.categorias || [],
-            subcategorias: book.subcategorias || []
+            titulo: producto.titulo || "",
+            isbn: producto.isbn || "",
+            precio: producto.precio || 0,
+            descuento: producto.descuento || 0,
+            descripcion: producto.descripcion || "",
+            resumen: producto.resumen || "",
+            vistaPrevia: producto.vistaPrevia || "",
+            imagenPortada: producto.imagenPortada || "",
+            imagenSubportada: producto.imagenSubportada || "",
+            fechaPublicacion: producto.fechaPublicacion || "",
+            autores: producto.autor || [],
+            editorial: producto.editorial || "",
+            categorias: producto.categorias || [],
+            subcategorias: producto.subcategorias || []
         });
     };
 
@@ -91,6 +117,17 @@ const EditBook = ({ book }) => {
         { id: 2, name: "No Ficción" },
         { id: 3, name: "Infantil" },
     ];
+
+    const eliminarProducto = (prod) => {
+        if(window.confirm("Estás seguro de eliminar?")){
+            axios
+            .delete(`${API_URL}/api/libro/${prod.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token()}`
+                }
+            })
+        }
+    }
 
 
     const handleSaveClick = async () => {
@@ -111,15 +148,24 @@ const EditBook = ({ book }) => {
                 <div className="flex justify-between items-center">
                     <h1 className="text-black text-3xl font-bold">Detalles del Libro</h1>
                     
-                    {!isEditing && (
+                    <div className="flex gap-3">
                         <button
-                            className="bg-blue-500 border-blue-600 hover:bg-blue-700 border-2 text-white font-bold py-2 px-3 rounded-md flex gap-2"
-                            onClick={handleEditClick}
-                        >   
-                            <FilePenLine />
-                            <span className="hidden md:flex">Editar Libro</span>
+                            className="bg-red-500 border-red-600 hover:bg-red-700 border-2 text-white font-bold py-2 px-3 rounded-md flex gap-2"
+                            onClick={() => eliminarProducto(producto)}
+                        >
+                            <Trash2 />
+                            <span className="hidden md:flex">Eliminar Libro</span>
                         </button>
-                    )}
+                        {!isEditing && (
+                            <button
+                                className="bg-blue-500 border-blue-600 hover:bg-blue-700 border-2 text-white font-bold py-2 px-3 rounded-md flex gap-2"
+                                onClick={handleEditClick}
+                            >   
+                                <FilePenLine />
+                                <span className="hidden md:flex">Editar Libro</span>
+                            </button>
+                        )}
+                    </div>
                 </div>
 
                 <form className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">

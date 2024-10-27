@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch';
 import axios from 'axios';
 import { API_URL } from '../../../env';
 import { token } from '../../helpers/auth';
+import Loader from '../atoms/Loader';
 
 const CreateBook = () => {
     //Los Hooks deben estar al inicio, sin depender de ningún condicional.
@@ -70,10 +71,10 @@ const CreateBook = () => {
     }
 
     // Condicionales de retorno, fuera del alcance de los hooks
-    if(loadingEditorial) return <h1 className="text-black">CARGANDO ...</h1>
+    if(loadingEditorial) return <Loader />
     if(errorEditorial) return <h1 className="text-black">ERROR EN LA PETICIÓN.</h1>
 
-    if(loadingCategoria) return <h1 className="text-black">CARGANDO ...</h1>
+    if(loadingCategoria) return <Loader />
     if(errorCategoria) return <h1 className="text-black">ERROR EN LA PETICIÓN.</h1>
 
     return (

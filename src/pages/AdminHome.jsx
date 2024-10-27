@@ -4,12 +4,13 @@ import CreateButton from "../components/buttons/CreateButton"
 import Sidebar from "../components/sidebar/Sidebar"
 import { CirclePlus } from 'lucide-react';
 import useFetch from "../hooks/useFetch";
+import Loader from "../components/atoms/Loader";
 
 const AdminHome = () => {
 
     const {data, error, loading} = useFetch("api/libro")
     
-    if(loading) return <h1 className="text-black">CARGANDO ...</h1>
+    if(loading) return <Loader />
     if(error) return <h1 className="text-black">ERROR EN LA PETICIÓN.</h1>
     
     return(
