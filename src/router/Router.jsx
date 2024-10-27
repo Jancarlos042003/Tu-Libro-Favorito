@@ -7,7 +7,9 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import AdminHome from "../pages/AdminHome"
 import Admin from "../components/templates/Admin";
-import Delete from "../pages/Delete";
+import CreateBook from "../components/form/CreateBook";
+import Inventory from "../pages/Inventory";
+import EditBook from "../components/form/EditBook";
 
 const router = createBrowserRouter([
     {
@@ -45,13 +47,17 @@ const router = createBrowserRouter([
                 element: <AdminHome />,
             },
             {
-                path: "libros",
-                element: <AdminHome />,
+                path: "/admin/crear",
+                element: <CreateBook />,
             },
             {
-                path: "detalles",
-                element: <Delete />,
+                path: "/admin/inventario",
+                element: <Inventory />,
             },
+            {
+                path: "/admin/detalles/:id",
+                element: <EditBook />,
+            }
         ],
     },
     

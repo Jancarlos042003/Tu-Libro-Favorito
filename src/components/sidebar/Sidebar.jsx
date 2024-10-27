@@ -1,21 +1,21 @@
-import React from 'react';
 import { Library, BookCopy, TriangleAlert } from 'lucide-react';
 import ButtonNav from './ButtonNav';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserSection from './UserSection';
+import { deleteToken } from '../../helpers/auth';
 
 const Sidebar = () => {
-
-
     const user = {
         nombre: 'Alex García',
         email: 'alex@ejemplo.com',
         iniciales: 'AG'
     };
 
+    const nav = useNavigate()
+
     const handleLogout = () => {
-        // Implementar lógica de cierre de sesión aquí
-        console.log('Cerrando sesión...');
+        deleteToken()
+        nav("/")
     };
 
     return (
@@ -25,7 +25,7 @@ const Sidebar = () => {
                     <ButtonNav Icon={Library} hover={"Libros"} />
                 </Link>
 
-                <Link>
+                <Link to={"/admin/inventario"}>
                     <ButtonNav Icon={BookCopy} hover={"Inventario"} />
                 </Link>
                 

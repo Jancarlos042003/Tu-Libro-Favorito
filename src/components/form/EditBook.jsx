@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import CategorySelector from "./CategorySelector";
 
 const EditBook = ({ book }) => {
-    // Si no hay libro, iniciamos en modo edición (creación)
+    
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         titulo: "",
