@@ -15,16 +15,13 @@ const AdminHome = () => {
     
     return(
         <div>
-            <Sidebar />
-            <div className="ml-16 p-4 md:p-6">
-                <div className="flex justify-between items-center container m-auto py-2">
-                    <h1 className="text-black text-3xl font-bold">Todos los Libros</h1>
-                    <Link to={"/admin/crear"}>
-                        <CreateButton Icon={CirclePlus} palabra={"Libro"} />
-                    </Link>
-                </div>
-                <BookList books={data} />
+            <div className="flex justify-between items-center container m-auto py-2">
+                <h1 className="text-black text-3xl font-bold">Todos los Libros</h1>
+                <Link to={"/admin/crear"}>
+                    <CreateButton Icon={CirclePlus} palabra={"Libro"} />
+                </Link>
             </div>
+            <BookList books={data} />
         </div>
     )
 }

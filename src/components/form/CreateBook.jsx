@@ -246,199 +246,197 @@ const CreateBook = () => {
 
 
     return (
-        <div className="ml-16 p-4 md:p-6">
-            <div className="container mx-auto">
-                <div className="flex justify-between items-center">
-                    <h1 className="text-black text-3xl font-bold">
-                        {`${params.id ? "Editar" : "Crear"}`} Libro
-                    </h1>
-                    {params.id && (
-                        <div className="flex gap-3">
+        <div className="container mx-auto">
+            <div className="flex justify-between items-center">
+                <h1 className="text-black text-3xl font-bold">
+                    {`${params.id ? "Editar" : "Crear"}`} Libro
+                </h1>
+                {params.id && (
+                    <div className="flex gap-3">
+                        <button
+                            title='Eliminar Libro'
+                            className="bg-red-500 border-red-600 hover:bg-red-700 border-2 text-white font-bold py-2 px-3 rounded-md flex gap-2"
+                            onClick={() => eliminarProducto(producto)}
+                        >
+                            <Trash2 />
+                        </button>
+                        {!isEditing && (
                             <button
-                                title='Eliminar Libro'
-                                className="bg-red-500 border-red-600 hover:bg-red-700 border-2 text-white font-bold py-2 px-3 rounded-md flex gap-2"
-                                onClick={() => eliminarProducto(producto)}
-                            >
-                                <Trash2 />
+                                title='Editar Libro'
+                                className="bg-blue-500 border-blue-600 hover:bg-blue-700 border-2 text-white font-bold py-2 px-3 rounded-md flex gap-2"
+                                onClick={handleEditClick}
+                            >   
+                                <FilePenLine />
                             </button>
-                            {!isEditing && (
-                                <button
-                                    title='Editar Libro'
-                                    className="bg-blue-500 border-blue-600 hover:bg-blue-700 border-2 text-white font-bold py-2 px-3 rounded-md flex gap-2"
-                                    onClick={handleEditClick}
-                                >   
-                                    <FilePenLine />
-                                </button>
-                            )}
-                        </div>
-                    )}
-                </div>
-                <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
-                    <div className="space-y-2">
-                        <Input titulo={"Título"} nombre={"titulo"} tipo={"text"} value={producto?.titulo} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese el título del libro"} />
+                        )}
                     </div>
-                    
-                    <div className="space-y-2">
-                        <Input titulo={"Autor"} nombre={"autor"} tipo={"text"} value={producto?.autor} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese el autor del libro"} />
-                    </div>
-
-                    <div className="space-y-2">
-                        <label>
-                            <span className='text-black'>Fecha de Publicación</span>
-                            <input 
-                                className="text-black text-base w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:ring-black focus:border-black disabled:bg-gray-100"
-                                type="date"
-                                name='fechaPublicacion'
-                                value={producto?.fechaPublicacion || ''}
-                                onChange={handleInputChange} 
-                                disabled={params.id && !isEditing} 
-                            />
-                        </label>
-                    </div>
-
-                    <div className="space-y-2">
-                        <label className="text-base font-medium text-black">
-                            Editorial
-                            <select 
-                                className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors appearance-none bg-white disabled:bg-gray-100"
-                                required
-                                disabled={params.id && !isEditing} 
-                                value={selectedEditorial}
-                                onChange={handleEditorialChange}
-                            >
-                                <option value="" className='text-neutral-500' >--Seleccione una editorial--</option>
-                                {editoriales.map((editorial) => (
-                                    <option key={editorial.id} value={editorial.id}>
-                                        {editorial.nombre}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    </div>
-
-                    <div className="space-y-2">
-                        <label className="text-base font-medium text-black">
-                            Categorías
-                            <select 
-                                className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors appearance-none bg-white disabled:bg-gray-100"
-                                onChange={handleCategoryChange}
-                                value={currentCategory}
-                                disabled={params.id && !isEditing} 
-                            >
-                                <option value="" className='text-neutral-500'>--Seleccione las categorías--</option>
-                                {categories.map((category) => (
-                                    <option 
-                                        key={category.id}
-                                        value={category.id}  
-                                        disabled={selectedCategories.some(cat => cat.id === category.id)}
-                                    >
-                                        {category.nombre}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                            {selectedCategories.map((category) => (
-                                <div 
-                                    key={category.id}
-                                    className="flex items-center gap-1 bg-gray-950 px-3 py-1 rounded-full"
-                                >
-                                    <span>{category.nombre}</span>
-                                    <button
-                                        disabled={params.id && !isEditing} 
-                                        type="button"
-                                        onClick={() => removeCategory(category.id)}
-                                        className="hover:text-gray-500 text-gray-300"
-                                    >
-                                        <X size={14} />
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="space-y-2">
-                        <Input titulo={"ISBN"} nombre={"isbn"} tipo={"text"} value={producto?.isbn} onChange={handleInputChange} disabled={params.id && !isEditing} placeholder={"Ingrese el ISBN del libro"} />
-                    </div>
-
-                    <div className="space-y-2">
-                        <label className="text-base font-medium text-black" htmlFor="precio">
-                            Precio
-                            <input 
-                                name="precio" 
-                                type="number" 
-                                min="0" 
-                                step="0.01" 
-                                placeholder="0.00"
-                                value={producto?.precio || ''}
-                                onChange={handleInputChange}
-                                disabled={params.id && !isEditing} 
-                                required
-                                className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors disabled:bg-gray-100"
-                            />
-                        </label>
-                    </div>
-
-                    <div className="space-y-2">
-                        <label className="text-base font-medium text-black" htmlFor="descuento">
-                            Descuento (%)
-                            <input 
-                                name="descuento" 
-                                type="number"
-                                min="0" 
-                                max="100" 
-                                placeholder="0"
-                                disabled={params.id && !isEditing} 
-                                value={producto?.descuento || ''}
-                                onChange={handleInputChange} 
-                                required
-                                className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors disabled:bg-gray-100"
-                            />
-                        </label>
-                    </div>
-
-                    <div className="space-y-2 md:col-span-2">
-                        <TextArea titulo={"Descripción"} nombre={"descripcion"} value={producto?.descripcion} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese una breve descripción del libro"} rows={2} />
-                    </div>
-
-                    <div className="space-y-2 md:col-span-2">
-                        <TextArea titulo={"Resumen"} nombre={"resumen"} value={producto?.resumen} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese un resumen del libro"} rows={4} />
-                    </div>
-
-                    <div className="space-y-2 md:col-span-2">
-                        <TextArea titulo={"Vista Previa"} nombre={"vistaPrevia"} value={producto?.vistaPrevia} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese el contenido de prueba para la vista previa"} rows={6} />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Input titulo={"Imagen de Portada"} nombre={"imgPortada"} value={producto?.imgPortada} onChange={handleInputChange}  disabled={params.id && !isEditing} tipo={"text"} placeholder={"Ingrese la URL de la portada del libro"} />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Input titulo={"Imagen de Subportada"} nombre={"imgSubportada"} value={producto?.imgSubportada} onChange={handleInputChange}  disabled={params.id && !isEditing} tipo={"text"} placeholder={"Ingrese la URL de la subportada del libro"} />
-                    </div>
-                    
-                    {isEditing &&
-                        (<div className="md:col-span-2 flex justify-end mt-5 space-x-3">
-                            <button
-                                type="button"
-                                className="bg-red-500 border-red-700 border-2 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl"
-                                onClick={handleCancelClick}
-                            >
-                                Cancelar
-                            </button>
-                            <button
-                                type="submit"
-                                className="bg-green-600 border-green-700 border-2 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl"
-                            >
-                                Guardar
-                            </button>
-                        </div>) 
-                    }
-                    <div className="md:col-span-2 flex justify-end mt-5">
-                        {!params.id && <SendButton text={"Crear Libro"}/>}
-                    </div>
-                </form>
+                )}
             </div>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
+                <div className="space-y-2">
+                    <Input titulo={"Título"} nombre={"titulo"} tipo={"text"} value={producto?.titulo} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese el título del libro"} />
+                </div>
+                
+                <div className="space-y-2">
+                    <Input titulo={"Autor"} nombre={"autor"} tipo={"text"} value={producto?.autor} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese el autor del libro"} />
+                </div>
+
+                <div className="space-y-2">
+                    <label>
+                        <span className='text-black'>Fecha de Publicación</span>
+                        <input 
+                            className="text-black text-base w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-0 focus:ring-black focus:border-black disabled:bg-gray-100"
+                            type="date"
+                            name='fechaPublicacion'
+                            value={producto?.fechaPublicacion || ''}
+                            onChange={handleInputChange} 
+                            disabled={params.id && !isEditing} 
+                        />
+                    </label>
+                </div>
+
+                <div className="space-y-2">
+                    <label className="text-base font-medium text-black">
+                        Editorial
+                        <select 
+                            className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors appearance-none bg-white disabled:bg-gray-100"
+                            required
+                            disabled={params.id && !isEditing} 
+                            value={selectedEditorial}
+                            onChange={handleEditorialChange}
+                        >
+                            <option value="" className='text-neutral-500' >--Seleccione una editorial--</option>
+                            {editoriales.map((editorial) => (
+                                <option key={editorial.id} value={editorial.id}>
+                                    {editorial.nombre}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                </div>
+
+                <div className="space-y-2">
+                    <label className="text-base font-medium text-black">
+                        Categorías
+                        <select 
+                            className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors appearance-none bg-white disabled:bg-gray-100"
+                            onChange={handleCategoryChange}
+                            value={currentCategory}
+                            disabled={params.id && !isEditing} 
+                        >
+                            <option value="" className='text-neutral-500'>--Seleccione las categorías--</option>
+                            {categories.map((category) => (
+                                <option 
+                                    key={category.id}
+                                    value={category.id}  
+                                    disabled={selectedCategories.some(cat => cat.id === category.id)}
+                                >
+                                    {category.nombre}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                        {selectedCategories.map((category) => (
+                            <div 
+                                key={category.id}
+                                className="flex items-center gap-1 bg-gray-950 px-3 py-1 rounded-full"
+                            >
+                                <span>{category.nombre}</span>
+                                <button
+                                    disabled={params.id && !isEditing} 
+                                    type="button"
+                                    onClick={() => removeCategory(category.id)}
+                                    className="hover:text-gray-500 text-gray-300"
+                                >
+                                    <X size={14} />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="space-y-2">
+                    <Input titulo={"ISBN"} nombre={"isbn"} tipo={"text"} value={producto?.isbn} onChange={handleInputChange} disabled={params.id && !isEditing} placeholder={"Ingrese el ISBN del libro"} />
+                </div>
+
+                <div className="space-y-2">
+                    <label className="text-base font-medium text-black" htmlFor="precio">
+                        Precio
+                        <input 
+                            name="precio" 
+                            type="number" 
+                            min="0" 
+                            step="0.01" 
+                            placeholder="0.00"
+                            value={producto?.precio || ''}
+                            onChange={handleInputChange}
+                            disabled={params.id && !isEditing} 
+                            required
+                            className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors disabled:bg-gray-100"
+                        />
+                    </label>
+                </div>
+
+                <div className="space-y-2">
+                    <label className="text-base font-medium text-black" htmlFor="descuento">
+                        Descuento (%)
+                        <input 
+                            name="descuento" 
+                            type="number"
+                            min="0" 
+                            max="100" 
+                            placeholder="0"
+                            disabled={params.id && !isEditing} 
+                            value={producto?.descuento || ''}
+                            onChange={handleInputChange} 
+                            required
+                            className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors disabled:bg-gray-100"
+                        />
+                    </label>
+                </div>
+
+                <div className="space-y-2 md:col-span-2">
+                    <TextArea titulo={"Descripción"} nombre={"descripcion"} value={producto?.descripcion} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese una breve descripción del libro"} rows={2} />
+                </div>
+
+                <div className="space-y-2 md:col-span-2">
+                    <TextArea titulo={"Resumen"} nombre={"resumen"} value={producto?.resumen} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese un resumen del libro"} rows={4} />
+                </div>
+
+                <div className="space-y-2 md:col-span-2">
+                    <TextArea titulo={"Vista Previa"} nombre={"vistaPrevia"} value={producto?.vistaPrevia} onChange={handleInputChange}  disabled={params.id && !isEditing} placeholder={"Ingrese el contenido de prueba para la vista previa"} rows={6} />
+                </div>
+
+                <div className="space-y-2">
+                    <Input titulo={"Imagen de Portada"} nombre={"imgPortada"} value={producto?.imgPortada} onChange={handleInputChange}  disabled={params.id && !isEditing} tipo={"text"} placeholder={"Ingrese la URL de la portada del libro"} />
+                </div>
+
+                <div className="space-y-2">
+                    <Input titulo={"Imagen de Subportada"} nombre={"imgSubportada"} value={producto?.imgSubportada} onChange={handleInputChange}  disabled={params.id && !isEditing} tipo={"text"} placeholder={"Ingrese la URL de la subportada del libro"} />
+                </div>
+                
+                {isEditing &&
+                    (<div className="md:col-span-2 flex justify-end mt-5 space-x-3">
+                        <button
+                            type="button"
+                            className="bg-red-500 border-red-700 border-2 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl"
+                            onClick={handleCancelClick}
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            type="submit"
+                            className="bg-green-600 border-green-700 border-2 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-xl"
+                        >
+                            Guardar
+                        </button>
+                    </div>) 
+                }
+                <div className="md:col-span-2 flex justify-end mt-5">
+                    {!params.id && <SendButton text={"Crear Libro"}/>}
+                </div>
+            </form>
         </div>
     );
 };

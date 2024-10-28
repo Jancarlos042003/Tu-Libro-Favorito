@@ -20,7 +20,7 @@ const Inventory = () => {
     };
 
     return (
-    <div className="p-4 md:p-6 ml-16">
+    <div>
         <CreateInventary onAgregarLibro={agregarLibro} />
         <BooksInventory
         libros={libros} 
