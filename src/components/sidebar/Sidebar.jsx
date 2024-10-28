@@ -13,7 +13,7 @@ const Sidebar = () => {
     };
 
     return (
-        <nav className="fixed left-0 top-0 h-full w-12 bg-black flex flex-col items-center py-4 space-y-8 z-50">
+        <nav className="fixed left-0 top-0 h-full w-12 sm:w-16 bg-black flex flex-col items-center py-4 space-y-8 z-50">
             <div className="flex flex-col items-center space-y-4">
                 <Link>
                     <ButtonNav Icon={Library} hover={"Libros"} />

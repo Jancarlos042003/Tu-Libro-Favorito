@@ -5,7 +5,7 @@ const Admin = () => {
     return(
         <div>
             <Sidebar />
-            <div className="ml-12 px-2 py-4">
+            <div className="ml-12 sm:ml-16 px-2 py-4">
                 <Outlet />
             </div>
         </div>
