@@ -1,43 +1,31 @@
-import { createBrowserRouter } from "react-router-dom";
-import Error404 from "../pages/Error404";
-import Home from "../pages/Home"
-import Detail from "../pages/Detail"
-import App from "../components/templates/App";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import AdminHome from "../pages/AdminHome"
-import Admin from "../components/templates/Admin";
-import CreateBook from "../components/form/CreateBook";
-import Inventory from "../pages/Inventory";
-
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        errorElement:<Error404/>,
-        children:[
+        errorElement: <Error404 />,
+        children: [
             {
                 index: true,
                 element: <Home />,
             },
             {
-                path: "/productos",
+                path: "productos",
                 element: <Detail />,
             },
-        ]   
+        ],
     },
     {
-        path: "/login",
+        path: "login",
         element: <Login />,
-        errorElement:<Error404/>,
+        errorElement: <Error404 />,
     },
     {
-        path: "/registro",
+        path: "registro",
         element: <Register />,
-        errorElement:<Error404/>,
+        errorElement: <Error404 />,
     },
     {
-        path: "/admin",
+        path: "admin",
         element: <Admin />,
         errorElement: <Error404 />,
         children: [
@@ -46,20 +34,19 @@ const router = createBrowserRouter([
                 element: <AdminHome />,
             },
             {
-                path: "/admin/crear",
+                path: "crear",
                 element: <CreateBook />,
             },
             {
-                path: "/admin/inventario",
+                path: "inventario",
                 element: <Inventory />,
             },
             {
-                path: "/admin/detalles/:id",
+                path: "detalles/:id",
                 element: <CreateBook />,
-            }
+            },
         ],
     },
-    
-])
+]);
 
 export default router;
