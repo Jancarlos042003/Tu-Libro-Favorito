@@ -1,6 +1,6 @@
 const LoginTemplate = ({ children, title }) => {
     return (
-        <section className="h-screen bg-gray-200 md:h-screen">
+        <section className="h-screen bg-gray-200">
             <div className="container m-auto py-12 px-6 h-full">
                 <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
                     <div className="xl:w-10/12">
@@ -23,7 +23,7 @@ const LoginTemplate = ({ children, title }) => {
                         </div>
                         <div className="bg-black opacity-90 lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none">
                             <div className="text-white px-2 mx-6 my-16 md:px-12 md:mx-6">
-                                <span className="text-x font-semibold mb-6">
+                                <span className="text-2xl font-semibold mb-6">
                                     Más que vender libros,
                                 </span>
                                 <h4 className="text-4xl italic">conectamos tus historias favoritas.</h4>
