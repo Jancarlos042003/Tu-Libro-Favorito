@@ -5,21 +5,15 @@ import UserSection from './UserSection';
 import { deleteToken } from '../../helpers/auth';
 
 const Sidebar = () => {
-    const user = {
-        nombre: 'Alex García',
-        email: 'alex@ejemplo.com',
-        iniciales: 'AG'
-    };
-
     const nav = useNavigate()
 
     const handleLogout = () => {
         deleteToken()
-        nav("/")
+        nav("/login")
     };
 
     return (
-        <nav className="fixed left-0 top-0 h-screen w-12 bg-gray-900 flex flex-col items-center py-4 space-y-8 z-50">
+        <nav className="fixed left-0 top-0 h-screen w-12 bg-black flex flex-col items-center py-4 space-y-8 z-50">
             <div className="flex flex-col items-center space-y-4">
                 <Link>
                     <ButtonNav Icon={Library} hover={"Libros"} />
@@ -37,7 +31,6 @@ const Sidebar = () => {
             <div className="flex-grow" />
 
             <UserSection 
-                usuario={user}
                 onLogout={handleLogout}
             />
         </nav>

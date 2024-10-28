@@ -2,10 +2,7 @@ const ButtonNav = ({ Icon, isActive = false, hover }) => {
     return (
         <div className="relative group">
             <button 
-                className={`p-3 rounded-lg transition-colors ${isActive 
-                        ? 'text-blue-500' 
-                        : 'text-gray-400 hover:bg-gray-800'
-                    }`}
+                className={`p-3 rounded-full hover:bg-neutral-800 transition-colors`}
             >
                 <Icon size={20} />
             </button>
