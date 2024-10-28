@@ -9,7 +9,6 @@ import AdminHome from "../pages/AdminHome"
 import Admin from "../components/templates/Admin";
 import CreateBook from "../components/form/CreateBook";
 import Inventory from "../pages/Inventory";
-import EditBook from "../components/form/EditBook";
 
 const router = createBrowserRouter([
     {

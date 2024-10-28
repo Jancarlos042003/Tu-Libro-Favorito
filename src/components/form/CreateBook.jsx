@@ -11,6 +11,29 @@ import Loader from '../atoms/Loader';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const CreateBook = () => {
+    // Definir el estado inicial
+    const initialState = {
+        titulo: '',
+        autor: '',
+        fechaPublicacion: '',
+        editorial: '',
+        isbn: '',
+        precio: '',
+        descuento: '0',
+        descripcion: '',
+        resumen: '',
+        vistaPrevia: '',
+        imgPortada: '',
+        imgSubportada: ''
+    };
+
+    // Función para resetear el formulario
+    const resetForm = () => {
+        setProducto(initialState);
+        setSelectedCategories([]);
+        setSelectedEditorial('');
+        setCurrentCategory('');
+    };
 
     // REDIRECCIONAMIENTO
     const nav = useNavigate()
@@ -188,7 +211,7 @@ const CreateBook = () => {
             })
             .then(() => {
                 alert("Libro actualizado exitosamente.")
-                setIsEditing(false  )
+                setIsEditing(false)
             })
             .catch((error) => {
                 console.error('Error completo:', error);
@@ -203,6 +226,7 @@ const CreateBook = () => {
             })
             .then(() => {
                 alert("Libro creado exitosamente.")
+                resetForm()
             })
             .catch((error) => {
                 console.error('Error completo:', error);
@@ -334,7 +358,7 @@ const CreateBook = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <Input titulo={"ISBN"} nombre={"isbn"} tipo={"text"} value={producto?.isbn} disabled={params.id && !isEditing} placeholder={"Ingrese el ISBN del libro"} />
+                        <Input titulo={"ISBN"} nombre={"isbn"} tipo={"text"} value={producto?.isbn} onChange={handleInputChange} disabled={params.id && !isEditing} placeholder={"Ingrese el ISBN del libro"} />
                     </div>
 
                     <div className="space-y-2">
@@ -347,7 +371,7 @@ const CreateBook = () => {
                                 step="0.01" 
                                 placeholder="0.00"
                                 value={producto?.precio || ''}
-                                
+                                onChange={handleInputChange}
                                 disabled={params.id && !isEditing} 
                                 required
                                 className="text-black w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-0 focus:ring-black focus:border-black outline-none transition-colors disabled:bg-gray-100"
