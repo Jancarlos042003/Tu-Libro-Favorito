@@ -1,7 +1,7 @@
 import { ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const AddToCartButton = ({text}) => {
+const AddToCartButton = ({text="", onClick}) => {
     const [margin, setMargin] = useState("mr-0");
 
     useEffect(()=>{
@@ -12,6 +12,7 @@ const AddToCartButton = ({text}) => {
         <button 
             className="text-white font-bold px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 transition-colors duration-300 ease-in-out focus:outline-none text-sm flex justify-betwee"
             aria-label="Añadir al carrito"
+            onClick={onClick}
         >
             <ShoppingCart className={margin} size={18} /> 
             <span>{text}</span>

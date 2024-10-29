@@ -1,8 +1,10 @@
 import { Trash2 } from "lucide-react";
-import { useState } from "react";
+import { CartContext } from "../../context/CartContext";
+import { useContext, useState } from "react";
 
-const CardBook = ({book}) => {
+const CardBook = ({libro}) => {
     const [quantity, setQuantity] = useState(1);
+    const { state, dispatch } = useContext(CartContext)
 
     const handleIncrement = () => {
         setQuantity(quantity + 1);
@@ -13,13 +15,21 @@ const CardBook = ({book}) => {
         setQuantity(quantity - 1);
         }
     };
+
+    const removeFromCart = () => {
+        dispatch({
+            type: "REMOVE_FROM_CART",
+            payload: libro
+        })
+    }
+
     return(
-        <div className="flex justify-between items-center border border-neutral-300 p-2 rounded-lg">
+        <div className="flex justify-between items-center border border-neutral-300 p-2 my-2 rounded-lg">
                 <div className="flex items-center">
-                    <img className="w-20 h-30 object-cover rounded-md" src={book.image} alt={book.title} />
+                    <img className="w-20 h-30 object-cover rounded-md" src={libro.imgPortada} alt={libro.titulo} />
                     <div className="flex flex-col ml-4">
-                    <span className="font-medium">{book.title}</span>
-                    <span className="text-gray-500">S/.{book.price}</span>
+                    <span className="font-medium">{libro.titulo}</span>
+                    <span className="text-gray-500">S/.{libro.precio}</span>
                     </div>
                 </div>
                 <div className="flex items-center">
@@ -38,7 +48,7 @@ const CardBook = ({book}) => {
                     >
                         +
                     </button>
-                    <button className="hover:text-red-600 ml-4">
+                    <button className="hover:text-red-600 ml-4" onClick={removeFromCart}>
                         <Trash2 size={21} />
                     </button>
                 </div>

@@ -2,8 +2,27 @@ import AddToCartButton from "../card/AddToCartButton"
 import { Star } from "lucide-react" 
 import Categories from "./Categories"
 import PriceDisplay from "../card/PriceDisplay"
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext"
+import DeleteFromCart from "../card/DeleteFromCart"
 
 const BookDetail = ({libro}) => {
+    const {state, dispatch} = useContext(CartContext)
+
+    const addToCart = () => {
+        dispatch({
+            type: "ADD_TO_CART",
+            payload: libro
+        })
+    }
+
+    const removeFromCart = () => {
+        dispatch({
+            type: "REMOVE_FROM_CART",
+            payload: libro
+        })
+    }
+
     return(
         <div className="bg-white text-gray-800 w-full max-w-7xl mx-auto p-6 rounded-lg border mt-8">
             <div className="flex flex-col md:flex-row gap-8">
@@ -39,7 +58,11 @@ const BookDetail = ({libro}) => {
                             <div className="text-center sm:text-left">
                                 <PriceDisplay price={libro.precio} discount={libro.descuento} fontSize="2xl"/>
                             </div>
-                            <AddToCartButton text="Añadir al carrito" />
+                            {!state.cart.find(item => item.id === libro.id) ? (
+                                <AddToCartButton text="Añadir al carrito" onClick={addToCart} />
+                            ) : (
+                                <DeleteFromCart onClick={removeFromCart} />
+                            )}
                         </div>
 
                         <Categories categorias={libro.categorias}/>

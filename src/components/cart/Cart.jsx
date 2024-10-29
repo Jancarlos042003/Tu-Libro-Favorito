@@ -1,11 +1,12 @@
 import { X } from "lucide-react"
 import CardBook from "./CardBook";
-const book = {
-    title: "Elon Musk",
-    image: "https://th.bing.com/th/id/OIP.oqHCJx-8e1y5vqCmM7j5LwHaLW?rs=1&pid=ImgDetMain",
-    price: 70
-};
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
+
 const Cart = ({onClose}) => {
+
+    const {state} = useContext(CartContext)
+
     return(
         <>
             <div
@@ -18,16 +19,20 @@ const Cart = ({onClose}) => {
                 <div className="flex justify-between py-6">
                     <h1 className="font-bold">CARRITO DE COMPRAS</h1>
                     <button onClick={onClose}>
-                    <X />
+                        <X />
                     </button>
-                </div>
-                <CardBook book={book} />
+                </div> 
+                {state.cart.length > 0 ?  state.cart.map((libro) => 
+                    (<CardBook key={libro.id} libro={libro} />)
+                ) : (
+                    <p>Tu carrito esta vacío</p>
+                )}
                 <div className="mt-6">
                     <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full">
                         Finalizar Compra
                     </button>
                 </div>
-        </section>
+            </section>
         </>
     )
 }

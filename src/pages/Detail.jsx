@@ -18,15 +18,12 @@ const Detail = () => {
     const [error, setError] = useState()
     const [loading, setLoading] = useState(false)
 
-    console.log(params.id)
-
     useEffect(() => {   
         if (params.id) {
             setLoading(true)
             axios
                 .get(`${API_URL}/api/libro/${params.id}`)
                 .then((resp) => {
-                    console.log(resp)
                     setLibro(resp.data)
                 })
                 .catch((error) => {
