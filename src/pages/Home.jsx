@@ -1,8 +1,8 @@
-import { Loader } from 'lucide-react';
 import BannerCarousel from '../components/carousel/BannerCarousel';
 import SectionBooks from '../components/recommendations/SectionBooks';
 import useFetch from '../hooks/useFetch';
 import FilterCategory from '../components/filter/FilterCategory';
+import Loader from '../components/atoms/Loader';
 
 const Home = () => {
     const {data: libros, error: errorLibro, loading: loadingLibro} = useFetch("api/libro")
