@@ -14,7 +14,7 @@ const Cart = ({onClose}) => {
                 }`}
                 onClick={onClose}
             />
-            <section className="fixed top-0 right-0 h-screen w-[450px] px-4 pb-4 text-black bg-stone-100 shadow-lg z-50">
+            <section className="fixed top-0 right-0 h-screen w-screen sm:w-[450px] px-4 pb-4 text-black bg-stone-100 shadow-lg z-50">
                 <div className="flex justify-between py-6">
                     <h1 className="font-bold">CARRITO DE COMPRAS</h1>
                     <button onClick={onClose}>
