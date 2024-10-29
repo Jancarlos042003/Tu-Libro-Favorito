@@ -21,7 +21,7 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "productos",
+                path: "libro/:id",
                 element: <Detail />,
             },
         ],
@@ -29,12 +29,10 @@ const router = createBrowserRouter([
     {
         path: "login",
         element: <Login />,
-        errorElement: <Error404 />,
     },
     {
         path: "registro",
         element: <Register />,
-        errorElement: <Error404 />,
     },
     {
         path: "admin",
