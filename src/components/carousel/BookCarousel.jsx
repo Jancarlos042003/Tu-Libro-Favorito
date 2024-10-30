@@ -8,7 +8,7 @@ import SwiperButtonPrev from '../button-nav/SwiperButtonPrev';
 
 const BookCarousel = ({books}) => {
     return(
-        <div className="w-full mx-auto px-2 md:px-0">
+        <div className="w-full mx-auto">
             <Swiper
                 modules={[Navigation]}
                 spaceBetween = {10}
