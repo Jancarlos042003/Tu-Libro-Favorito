@@ -27,11 +27,11 @@ const Cart = ({onClose}) => {
                 ) : (
                     <p>Tu carrito esta vacío</p>
                 )}
-                <div className="mt-6">
+                {/* <div className="mt-6">
                     <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full">
                         Finalizar Compra
                     </button>
-                </div>
+                </div> */}
             </section>
         </>
     )

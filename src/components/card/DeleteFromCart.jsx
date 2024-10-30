@@ -1,4 +1,4 @@
-import { ShoppingCart } from "lucide-react";
+import { CircleCheck } from "lucide-react";
 
 const DeleteFromCart = ({ onClick}) => {
 
@@ -8,7 +8,7 @@ const DeleteFromCart = ({ onClick}) => {
             aria-label="Eliminar del carrito"
             onClick={onClick}
         >
-            <ShoppingCart className="mr-2" size={18} /> 
+            <CircleCheck className="mr-2" size={18} /> 
             <span>Libro agregado</span>
         </button>
     )
