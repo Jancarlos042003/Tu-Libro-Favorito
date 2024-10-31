@@ -1,4 +1,4 @@
-import { Pencil, Star, Trash2 } from "lucide-react"
+import { Pencil, PencilLine, Star, Trash2 } from "lucide-react"
 import { useState } from "react"
 import axios from "axios"
 import { API_URL } from "../../../env"
@@ -150,7 +150,10 @@ const ReviewsSection = ({ resenias, setResenias, userData }) => {
                     )}
                 </div>
             )) : (
-                <p>Sé el primero en comentar</p>
+                <div className="w-full h-60 flex flex-col items-center justify-center">
+                    <PencilLine size={60} className="text-gray-300" />
+                    <span className="text-gray-300">Sé el primero en comentar ...</span>
+                </div>
             )}
         </section>
     )

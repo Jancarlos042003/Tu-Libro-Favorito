@@ -32,6 +32,7 @@ const ReviewForm = ({resenias= [], setResenias, idLibro}) => {
             const nuevaResenia = {
                 ...resp.data,
                 usuario: {
+                    id: userData.id,
                     nombreCompleto: userData.nombreCompleto
                 }
             }
