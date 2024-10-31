@@ -63,12 +63,12 @@ const Detail = () => {
     return(
         <>
             {libro ?
-                <>
+                <div className="mx-2 sm:mx-auto">
                     <BookDetail libro={libro} />
                     <BookPreview titulo={libro.titulo} vistaPrevia={libro.vistaPrevia} />
-                </> : <Loader />
+                </div> : <Loader />
             }
-            <div className="block md:flex max-w-7xl mx-auto gap-3">
+            <div className="block md:flex max-w-7xl mx-2 sm:mx-auto gap-3">
                 <ReviewsSection resenias={resenias} setResenias={setResenias} userData={userData} />
                 <ReviewForm resenias={resenias} setResenias={setResenias}  idLibro={params.id} />
             </div>

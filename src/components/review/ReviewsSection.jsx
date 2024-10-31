@@ -63,7 +63,7 @@ const ReviewsSection = ({ resenias, setResenias, userData }) => {
     };
 
     return(
-        <section className="bg-white text-gray-800 w-full mx-auto p-6 rounded-lg border mt-8">
+        <section className="bg-white text-gray-800 w-full mx-auto p-6 rounded-lg border border-gray-300 mt-8">
             <h3 className="font-bold text-2xl md:text-3xl text-gray-900 mb-2">Reseñas de Lectores</h3>
             {resenias.length !== 0 ? resenias.map((resenia) => (
                 <div key={resenia.id} className="mb-4 pb-4 border-b last:border-b-0">

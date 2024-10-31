@@ -63,11 +63,10 @@ const ReviewForm = ({resenias= [], setResenias, idLibro}) => {
 
     return(
         <>
-            <section className="bg-white text-gray-800 w-full mx-auto p-6 rounded-lg border mt-8 h-96">
+            <section className="bg-white text-gray-800 w-full mx-auto p-6 rounded-lg border border-gray-300 mt-8 h-96">
                 <h3 className="font-bold text-2xl md:text-3xl text-gray-900 mb-2">Añadir una Reseña</h3>
                 <form onSubmit={handleSubmitReview}>
                     <div>
-
 
                         <div className="flex" role="group" aria-label={`Rate this item ${rating} out of ${5} stars`}>
                             {[...Array(5)].map((_, index) => {
@@ -95,11 +94,10 @@ const ReviewForm = ({resenias= [], setResenias, idLibro}) => {
                         </div>
                     </div>
 
-
                     <label>
                         <h4 className="text-base text-gray-900 mb-2 mt-4">Tu reseña</h4>
                         <textarea 
-                            className="w-full rounded-md p-2 bg-transparent border resize-none mb-2" 
+                            className="w-full rounded-md p-2 bg-transparent border border-gray-300 resize-none mb-2" 
                             name="comentario" 
                             id="review"
                             value={reviewText}

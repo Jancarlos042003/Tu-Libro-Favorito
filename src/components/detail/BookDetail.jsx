@@ -24,7 +24,7 @@ const BookDetail = ({libro}) => {
     }
 
     return(
-        <div className="bg-white text-gray-800 w-full max-w-7xl mx-auto p-6 rounded-lg border mt-8">
+        <div className="bg-white text-gray-800 w-full max-w-7xl mx-auto p-6 rounded-lg border border-gray-300 mt-8">
             <div className="flex flex-col md:flex-row gap-8">
                 <div className="w-full md:w-1/3 flex justify-center">
                     <img 
@@ -49,7 +49,7 @@ const BookDetail = ({libro}) => {
                         </div>  */}
                     </div>
 
-                    <div className="bg-gray-50 p-4 rounded-md">
+                    <div className="bg-gray-100 p-4 rounded-md">
                         <p className="text-justify text-gray-700 leading-relaxed">{libro.resumen}</p>
                     </div>
 
