@@ -18,7 +18,6 @@ const UserProvider = ({children}) => {
             })
             .then(resp => {
                 setUserData(resp.data)
-                console.log(resp)
             })
         }
     },[])

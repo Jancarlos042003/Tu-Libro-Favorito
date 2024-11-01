@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Search, ShoppingCart, Menu, X, UserRound, MapPinHouse, LogOut } from 'lucide-react'
+import { Search, Menu, X, UserRound, MapPinHouse, LogOut } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchBar from './SearchBar'
 import Logo from './Logo'
 import { deleteToken, token } from '../../helpers/auth'
 import Cart from '../cart/Cart'
+import CartIcon from '../cart/CartIcon'
 
 
 const NavigationBar = () => {
@@ -79,7 +80,7 @@ const NavigationBar = () => {
                                 <MapPinHouse size={25} className="mr-1 font-bold" strokeWidth={2.5} />
                             </Link>
                             <button onClick={openCart}>
-                                <ShoppingCart size={25} className="mr-1" strokeWidth={2.5} />
+                                <CartIcon size={24} />
                             </button>
                             <UserButton />
                         </div>
@@ -113,7 +114,7 @@ const NavigationBar = () => {
                             onClick={openCart}
                             >
                                 <span>Carrito</span>
-                                <ShoppingCart size={20} className="mr-2" strokeWidth={2.5} />
+                                <CartIcon size={20} />
                             </button>
 
                             {isAuthenticated ? (

@@ -1,4 +1,4 @@
-import { X } from "lucide-react"
+import { ShoppingCart, X } from "lucide-react"
 import CardBook from "./CardBook";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
@@ -25,13 +25,16 @@ const Cart = ({onClose}) => {
                 {state.cart.length > 0 ?  state.cart.map((libro) => 
                     (<CardBook key={libro.id} libro={libro} />)
                 ) : (
-                    <p>Tu carrito esta vacío</p>
+                    <div className="w-full h-full flex flex-col items-center justify-center">
+                        <ShoppingCart size={100} className="text-gray-300" />
+                        <span className="text-gray-300">Tu carrito esta vacío.</span>
+                    </div>
                 )}
-                {/* <div className="mt-6">
+                <div className="mt-6">
                     <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full">
                         Finalizar Compra
                     </button>
-                </div> */}
+                </div>
             </section>
         </>
     )

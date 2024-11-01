@@ -5,8 +5,8 @@ const Logo = () =>{
     return(
         <div className="cursor-pointer">
             <Link className="flex items-end" to="/">
-                <SwatchBook size={40} />
-                <span className="italic text-lg">Tu Libro Favorito</span>
+                <SwatchBook size={42} />
+                <span className="italic text-xl hidden sm:block">Tu Libro Favorito</span>
             </Link>
         </div>
     )
