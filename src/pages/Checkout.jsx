@@ -73,7 +73,6 @@ const Checkout = () => {
         .then(resp => {
             setOrden(resp.data)
         })
-        .finally(setLoading(false))
     }
 
     return (
