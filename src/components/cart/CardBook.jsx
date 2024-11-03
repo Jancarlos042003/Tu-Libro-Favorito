@@ -1,19 +1,27 @@
 import { Trash2 } from "lucide-react";
 import { CartContext } from "../../context/CartContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 const CardBook = ({libro}) => {
-    const [quantity, setQuantity] = useState(1);
+    //const [quantity, setQuantity] = useState(1);
     const { state, dispatch } = useContext(CartContext)
 
+    // Buscar si el libro ya está en el carrito y obtener su cantidad actual
+    const bookInCart = state.cart.find(item => item.id === libro.id);
+    const quantity = bookInCart ? bookInCart.quantity : 0;
+
     const handleIncrement = () => {
-        setQuantity(quantity + 1);
+        dispatch({
+            type: "INCREMENT_QUANTITY",
+            payload: { id: libro.id }
+        })
     };
 
     const handleDecrement = () => {
-        if (quantity > 1) {
-        setQuantity(quantity - 1);
-        }
+        dispatch({
+            type: "DECREMENT_QUANTITY",
+            payload: { id: libro.id }
+        })
     };
 
     const removeFromCart = () => {
@@ -23,13 +31,20 @@ const CardBook = ({libro}) => {
         })
     }
 
+    const calcularDescuento = (precio, descuento) => {
+        const precioFinal = precio*(100-descuento)/100
+        return precioFinal.toFixed(2)
+    }
+
     return(
-        <div className="flex justify-between items-center border border-neutral-300 p-2 my-2 rounded-lg">
+        <div className="flex justify-between items-center border border-gray-300 p-2 my-2 rounded-lg">
                 <div className="flex items-center">
                     <img className="w-20 h-30 object-cover rounded-md" src={libro.imgPortada} alt={libro.titulo} />
                     <div className="flex flex-col ml-4">
-                    <span className="font-medium">{libro.titulo}</span>
-                    <span className="text-gray-500">S/.{libro.precio}</span>
+                        <span className="font-medium text-black">{libro.titulo}</span>
+                        
+                        <span className={`text-gray-500 ${libro.descuento > 0 && "line-through"} `}>${libro.precio}</span>
+                        {libro.descuento > 0 && <span className="text-green-600">${calcularDescuento(libro.precio, libro.descuento)}</span>}
                     </div>
                 </div>
                 <div className="flex items-center">
@@ -48,7 +63,7 @@ const CardBook = ({libro}) => {
                     >
                         +
                     </button>
-                    <button className="hover:text-red-600 ml-4" onClick={removeFromCart}>
+                    <button className="hover:text-red-600 text-neutral-400 ml-4" onClick={removeFromCart}>
                         <Trash2 size={21} />
                     </button>
                 </div>

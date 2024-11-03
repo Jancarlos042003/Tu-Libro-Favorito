@@ -2,10 +2,16 @@ import { ShoppingCart, X } from "lucide-react"
 import CardBook from "./CardBook";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({onClose}) => {
 
+    const nav = useNavigate()
     const {state} = useContext(CartContext)
+
+    const handleClick = () => {
+        nav("/checkout")
+    }
 
     return(
         <>
@@ -31,7 +37,9 @@ const Cart = ({onClose}) => {
                     </div>
                 )}
                 <div className="mt-6">
-                    <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full">
+                    <button
+                    onClick={handleClick}
+                    className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full">
                         Finalizar Compra
                     </button>
                 </div>

@@ -10,7 +10,7 @@ const UserProvider = ({children}) => {
     const[userData, setUserData] = useState()
 
     useEffect(() =>{
-        if(token){
+        if(token()){
             axios.get(`${API_URL}/api/usuario/me`, {
                 headers: {
                     Authorization: `Bearer ${token()}`

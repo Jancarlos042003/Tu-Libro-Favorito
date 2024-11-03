@@ -9,6 +9,8 @@ import AdminHome from "../pages/AdminHome"
 import Admin from "../components/templates/Admin";
 import CreateBook from "../components/form/CreateBook";
 import Inventory from "../pages/Inventory";
+import Checkout from "../pages/Checkout";
+import OrderCompleted from "../pages/OrderCompleted";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
     {
         path: "registro",
         element: <Register />,
+    },
+    {
+        path: "checkout",
+        element: <Checkout />,
+    },
+    {
+        path: "orden-completada",
+        element: <OrderCompleted />,
     },
     {
         path: "admin",

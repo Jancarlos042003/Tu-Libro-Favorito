@@ -11,3 +11,15 @@
   /* background-color: #242424; */
   background-color: white;
 }
+
+.bt-black{
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.bt-black:hover{
+  background-color: rgba(0, 0, 0, 0.801);
+}

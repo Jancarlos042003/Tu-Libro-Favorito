@@ -12,7 +12,7 @@ const ProductCard = ({ book }) => {
     const addToCart = () => {
         dispatch({
             type: "ADD_TO_CART",
-            payload: book
+            payload: book // Se le asigna al contexto que almacene libros
         })
     }
 
