@@ -1,16 +1,23 @@
 import { ShoppingCart, X } from "lucide-react"
 import CardBook from "./CardBook";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { token } from "../../helpers/auth";
+import Warning from "../atoms/Warning";
 
 const Cart = ({onClose}) => {
 
     const nav = useNavigate()
     const {state} = useContext(CartContext)
+    const [showWarning, setShowWarning] = useState(false);
 
     const handleClick = () => {
-        nav("/checkout")
+        if (token()) {
+            nav("/checkout")
+        }
+
+        setShowWarning(true)
     }
 
     return(
@@ -37,6 +44,9 @@ const Cart = ({onClose}) => {
                     </div>
                 )}
                 <div className="mt-6">
+                    {showWarning && (
+                        <Warning texto1={"¡Ups! Parece que no has iniciado sesión."} texto2="para continuar" />
+                    )}
                     <button
                     onClick={handleClick}
                     className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full">
