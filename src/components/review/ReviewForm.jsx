@@ -5,16 +5,31 @@ import { API_URL } from "../../../env";
 import { token } from "../../helpers/auth";
 import { UserContext } from "../../context/UserContext";
 import { Star } from "lucide-react";
+import Warning from "../atoms/Warning";
 
 const ReviewForm = ({resenias= [], setResenias, idLibro}) => {
     const [rating, setRating] = useState(0);
     const [userRating, setUserRating] = useState(0);
     const [reviewText, setReviewText] = useState('')
+    const [error, setError] = useState(null)
 
     const {userData} = useContext(UserContext)
 
     const handleSubmitReview = (e) => {
         e.preventDefault()
+
+        // Verificar si el comentario está vacío (solo contiene espacios)
+        // Se usa 'reviewText' que ya está vinculado al textarea
+        if (!reviewText.trim()) {
+            setError("Por favor complete todos los campos requeridos");
+            return; // Detener la ejecución para evitar el envío
+        }
+
+        // Verificar que la calificación sea mayor a 0
+        if (userRating === 0) {
+            setError("Por favor selecciona una calificación.");
+            return; // Detener la ejecución para evitar el envío
+        }
         
         const data =  {
             comentario: e.target.comentario.value,
@@ -42,9 +57,10 @@ const ReviewForm = ({resenias= [], setResenias, idLibro}) => {
             setRating(0);
             setUserRating(0)
             setReviewText('')
+            setError(null) // Limpiar el mensaje de error después del envío exitoso
         })
         .catch(error => {
-            console.error('Error al enviar la reseña:', error)
+            setError('Error al enviar la reseña:', error)
         })
     }
 
@@ -63,7 +79,7 @@ const ReviewForm = ({resenias= [], setResenias, idLibro}) => {
 
     return(
         <>
-            <section className="bg-white text-gray-800 w-full mx-auto p-6 rounded-lg border border-gray-300 mt-8 h-96">
+            <section className="bg-white text-gray-800 w-full mx-auto p-6 rounded-lg border border-gray-300 mt-8 h-auto">
                 <h3 className="font-bold text-2xl md:text-3xl text-gray-900 mb-2">Añadir una Reseña</h3>
                 <form onSubmit={handleSubmitReview}>
                     <div>
@@ -108,7 +124,17 @@ const ReviewForm = ({resenias= [], setResenias, idLibro}) => {
                         </textarea>
                     </label>
 
-                    <SendButton text="Publicar Reseña" />
+                    {error !== null && (
+                        <p className="text-center p-2 bg-red-100 text-red-800 mb-3">
+                            {error}
+                        </p>
+                    )}
+
+                    {!token() && (
+                        <Warning texto2="para compartir tu reseña"/>
+                    )}
+
+                    <SendButton text="Publicar Reseña" disabled={!token()} />
                 </form>
             </section>
         </>
