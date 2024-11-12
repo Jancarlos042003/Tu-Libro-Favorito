@@ -6,6 +6,7 @@ import Logo from './Logo'
 import { deleteToken, token } from '../../helpers/auth'
 import Cart from '../cart/Cart'
 import CartIcon from '../cart/CartIcon'
+import UserButton from './UserButton'
 
 
 const NavigationBar = () => {
@@ -36,38 +37,6 @@ const NavigationBar = () => {
         setIsCartOpen(false);
     };
 
-    const UserButton = () => {
-        {isAuthenticated && (
-            <div className="relative">
-                <button
-                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className="flex items-center focus:outline-none"
-                >
-                    <UserRound size={25} className="mr-2" strokeWidth={2.5} />
-                </button>
-                
-                {/* Menú desplegable */}
-                {isUserMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 text-black">
-                        <button
-                            onClick={handleLogout}
-                            className="w-auto m-auto rounded-lg px-5 py-2 text-left flex items-center hover:bg-black hover:text-white"
-                        >
-                            <LogOut size={20} className="mr-2" />
-                            <span>Cerrar sesión</span>
-                        </button>
-                    </div>
-                )}
-            </div>
-        )}
-
-        return (
-            <Link to="/login">
-                <UserRound size={25} className="mr-2" strokeWidth={2.5} />
-            </Link>
-        );
-    };
-
     return (
         <div>
             <nav className="bg-black text-white">
@@ -82,7 +51,12 @@ const NavigationBar = () => {
                             <button onClick={openCart}>
                                 <CartIcon size={24} />
                             </button>
-                            <UserButton />
+                            <UserButton 
+                                isAuthenticated={isAuthenticated}
+                                isUserMenuOpen={isUserMenuOpen}
+                                setIsUserMenuOpen={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                                handleLogout={handleLogout}
+                            />
                         </div>
                         <button
                             className="md:hidden"
