@@ -22,10 +22,12 @@ const ProductCard = ({ book }) => {
             payload: book
         })
     }
-
+    
+    // <Link to={`/libro/${book.id}`}> 
+    // lo establecemos como ruta absoluta en lugar de relativa(<Link to={`libro/${book.id}`}>)
     return (
         <div className="w-full bg-gray-100 rounded-lg overflow-hidden cursor-pointer relative transition-transform duration-300 ease-in-out">
-            <Link to={`libro/${book.id}`}>
+            <Link to={`/libro/${book.id}`}>
                 <BookImage 
                     image={book.imgPortada}
                     title={book.titulo}

@@ -42,33 +42,31 @@ const BookFilter = () => {
         <>
             {isOpen && (
                 <div 
-                    className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden"
+                    className="fixed inset-0 bg-black bg-opacity-50 z-50 lg:hidden"
                     onClick={toggleFilters}
                 />
             )}
             
-
             <button 
                 onClick={toggleFilters}
-                className="md:hidden fixed bottom-4 right-4 bg-black text-white p-3 rounded-full shadow-lg z-50"
+                className="lg:hidden fixed bottom-4 right-4 bg-black text-white p-3 rounded-full shadow-lg z-50"
             >
                 <Filter size={24} />
             </button>
 
             <div className={`
-                fixed md:relative top-0 right-0 h-screen w-80 md:w-[390px] z-50 md:z-0
+                fixed lg:relative top-0 right-0 h-screen w-80 lg:w-[390px] z-50 lg:z-0
                 bg-white text-black shadow-md p-4 
                 overflow-y-auto scrollbar-hide
                 transition-transform duration-300 ease-in-out
-                ${isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
-                md:flex md:flex-col
+                ${isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
             `}>
                 <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-1">
                         <Filter size={20}/>
                         <h2 className="text-2xl font-bold">Filtros</h2>
                     </div>
-                    <button onClick={toggleFilters} className="md:hidden">
+                    <button onClick={toggleFilters} className="lg:hidden">
                         <X size={19} />
                     </button>
                 </div>
@@ -84,8 +82,8 @@ const BookFilter = () => {
                     ))}
                 </aside>
             </div>
-    </>
+        </>
     );
 };
 
-    export default BookFilter;
+export default BookFilter;

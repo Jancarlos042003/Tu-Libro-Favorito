@@ -61,18 +61,18 @@ const Detail = () => {
 
     // Se verifica primero que libro obtenga la data obtenida de la API
     return(
-        <>
+        <div className="px-2">
             {libro ?
-                <div className="mx-2 sm:mx-auto">
+                <div>
                     <BookDetail libro={libro} />
                     <BookPreview titulo={libro.titulo} vistaPrevia={libro.vistaPrevia} />
                 </div> : <Loader />
             }
-            <div className="block md:flex max-w-7xl mx-2 sm:mx-auto gap-3">
+            <div className="block md:flex max-w-7xl sm:mx-auto gap-3">
                 <ReviewsSection resenias={resenias} setResenias={setResenias} userData={userData} />
                 <ReviewForm resenias={resenias} setResenias={setResenias}  idLibro={params.id} />
             </div>
-        </>
+        </div>
     )
 }
 

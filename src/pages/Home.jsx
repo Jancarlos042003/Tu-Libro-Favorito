@@ -20,7 +20,7 @@ const Home = () => {
                 <BannerCarousel />
                 {categorias.map(c => (
                     <div key={c.id} className='container mx-auto'>
-                        <SectionBooks titulo={c.nombre} libros={FilterCategory(libros, c.nombre)} />
+                        <SectionBooks titulo={c.nombre} idCategoria={c.id} libros={FilterCategory(libros, c.nombre)} />
                     </div>
                 ))}
             </main>

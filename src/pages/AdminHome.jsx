@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import BookList from "../components/booklist/BookList"
 import CreateButton from "../components/buttons/CreateButton"
-import Sidebar from "../components/sidebar/Sidebar"
 import { CirclePlus } from 'lucide-react';
 import useFetch from "../hooks/useFetch";
 import Loader from "../components/atoms/Loader";
