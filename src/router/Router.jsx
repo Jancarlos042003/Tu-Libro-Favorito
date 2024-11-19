@@ -11,6 +11,7 @@ import CreateBook from "../components/form/CreateBook";
 import Inventory from "../pages/Inventory";
 import Checkout from "../pages/Checkout";
 import OrderCompleted from "../pages/OrderCompleted";
+import ContentCategory from "../pages/ContentCategory";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: "libro/:id",
                 element: <Detail />,
+            },
+            {
+                path: "categoria/:id",
+                element: <ContentCategory />,
             },
         ],
     },
