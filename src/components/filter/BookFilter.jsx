@@ -49,7 +49,7 @@ const BookFilter = () => {
             
             <button 
                 onClick={toggleFilters}
-                className="lg:hidden fixed bottom-4 right-4 bg-black text-white p-3 rounded-full shadow-lg z-50"
+                className="lg:hidden fixed bottom-4 right-4 bg-black text-white p-3 rounded-full shadow-lg z-40"
             >
                 <Filter size={24} />
             </button>
