@@ -1,42 +1,61 @@
 import React, { useState } from "react";
 import ExpandableFilter from "./ExpandableFilter";
 import { Filter, X } from "lucide-react";
+import useFetch from "../../hooks/useFetch";
+import Loader from "../atoms/Loader";
 
-const BookFilter = () => {
+const BookFilter = ( { filtros, setFiltros, libros, actualizarLibrosFiltrados } ) => {
+    console.log(libros)
+
     const [isOpen, setIsOpen] = useState(false);
     const toggleFilters = () => setIsOpen(!isOpen);
 
-    const [filters, setFilters] = useState({
-        authors: [],
-        publishers: [],
-        subcategories: []
-    });
+    // Obtener autores únicos y ordenarlos
+    const autoresUnicos = [...new Set(libros.map(libro => libro.autor).filter(autor => autor))];
+    const autoresOrdenados = autoresUnicos.sort((a, b) => a.localeCompare(b));
+    
+    // OBTENEMOS Y ORDENAMOS LOS EDITORIALES
+    const {data: editoriales, error: errorEditorial, loading: loadingEditorial} = useFetch(`api/editorial`)
+    const editorialOrdenados = editoriales.map(editorial => editorial.nombre).sort((a, b) => a.localeCompare(b))
 
     const filterData = {
-        authors: [
-        "Gabriel García Márquez", "Isabel Allende", "Jorge Luis Borges", 
-        "Mario Vargas Llosa", "Julio Cortázar", "Pablo Neruda", 
-        "Octavio Paz", "Carlos Fuentes"
-        ],
-        publishers: [
-        "Penguin Random House", "HarperCollins", "Simon & Schuster", 
-        "Macmillan Publishers", "Hachette Book Group", "Planeta",
-        "Penguin Random House", "HarperCollins", "Simon & Schuster", 
-        "Macmillan Publishers", "Hachette Book Group", "Planeta"
-        ],
-        subcategories: [
-        "Novela", "Poesía", "Ensayo", "Cuento", "Biografía", 
-        "Ciencia Ficción", "Fantasía", "Historia", "Filosofía",
-        "Economía", "Matemáticas"
-        ]
+        autores: autoresOrdenados,
+        editoriales: editorialOrdenados,
     };
 
     const handleFilterChange = (filterType, selectedOptions) => {
-        setFilters(prevFilters => ({
-        ...prevFilters,
-        [filterType.toLowerCase()]: selectedOptions
-        }));
+        const nuevosFiltros = {
+            ...filtros,
+            [filterType.toLowerCase()]: selectedOptions
+        };
+        setFiltros(nuevosFiltros);
+    
+        // Filtrar los libros basándose en los nuevos filtros
+        const librosFiltrados = libros.filter(libro => {
+            const autorCoincide = 
+                !nuevosFiltros.autores.length || 
+                nuevosFiltros.autores.includes(libro.autor);
+            const editorialCoincide = 
+                !nuevosFiltros.editoriales.length || 
+                nuevosFiltros.editoriales.includes(libro.editorial?.nombre);
+            return autorCoincide && editorialCoincide;
+        });
+    
+        actualizarLibrosFiltrados(librosFiltrados);
     };
+    
+
+    // ESTADO DE CARGA
+    if(loadingEditorial) return <Loader />
+
+    // MANEJO DE ERRORES
+    if(errorEditorial) {
+        return (
+            <div className="container mx-auto text-center py-10">
+                <h1 className="text-black text-xl">Error al cargar el contenido. Por favor, intente más tarde.</h1>
+            </div>
+        )
+    }
 
     return ( 
         <>

@@ -7,7 +7,8 @@ const CheckboxFilter = ({ value, isChecked, onChange }) => {
                 <input 
                 type="checkbox" 
                 className="sr-only" // Ocultar el checkbox original
-                checked={isChecked} onChange={onChange}
+                checked={isChecked} 
+                onChange={onChange}
                 />
 
                 <div className={`flex items-center justify-center w-4 h-4 border rounded-sm ${isChecked ? 'bg-black border-black' : 'border-black' }`}>

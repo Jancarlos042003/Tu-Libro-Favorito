@@ -2,7 +2,12 @@ import { useState } from "react"
 import CheckboxFilter from "./CheckboxFilter"
 import View from "./View"
 
-const ExpandableFilter = ({title, options, initiallyVisible = 5}) => {
+const ExpandableFilter = ({
+    title, 
+    options=[], 
+    initiallyVisible = 5,
+    onFilterChange
+}) => {
     const[isExpanded, setIsExpanded] = useState(false)
     const[selectedOptions, setSelectedOptions] = useState([])
 
@@ -35,4 +40,4 @@ const ExpandableFilter = ({title, options, initiallyVisible = 5}) => {
     )
 }
 
-export default ExpandableFilter
+export default ExpandableFilter 
