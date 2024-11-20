@@ -80,7 +80,7 @@ const ContentCategory = () => {
                     // Verificamos si hay filtros aplicados
                     (filtros.autores.length > 0 || filtros.editoriales.length > 0) && librosFiltrados.length === 0 ? (
                         <div className="w-full h-screen p-4 text-left">
-                            <h2 className="text-gray-600 text-xl">No hay libros que coincidan con los filtros seleccionados.</h2>
+                            <h2 className="text-gray-600 text-base">No hay libros que coincidan con los filtros seleccionados.</h2>
                         </div>
                     ) : (
                         <BookList libros={librosFiltrados.length ? librosFiltrados : librosCategoria} />
