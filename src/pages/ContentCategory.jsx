@@ -44,8 +44,10 @@ const ContentCategory = () => {
                     setLoadingCategoria(false)
                 })
         }
-
+        
+        // Reiniciar filtros y libros filtrados al cambiar de categoría
         setLibrosFiltrados([]); // Reinicia la lista de libros filtrados
+        setFiltros({ autores: [], editoriales: [] });
     }, [params.id])
 
     // ESTADO DE CARGA
