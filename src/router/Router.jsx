@@ -12,6 +12,7 @@ import Inventory from "../pages/Inventory";
 import Checkout from "../pages/Checkout";
 import OrderCompleted from "../pages/OrderCompleted";
 import ContentCategory from "../pages/ContentCategory";
+import Alert from "../pages/Alert";
 
 const router = createBrowserRouter([
     {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
             {
                 path: "detalles/:id",
                 element: <CreateBook />,
+            },
+            {
+                path: "alertas",
+                element: <Alert />,
             },
         ],
     },

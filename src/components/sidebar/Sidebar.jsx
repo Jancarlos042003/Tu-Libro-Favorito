@@ -23,7 +23,7 @@ const Sidebar = () => {
                     <ButtonNav Icon={BookCopy} hover={"Inventario"} />
                 </Link>
                 
-                <Link>
+                <Link to={"/admin/alertas"}>
                     <ButtonNav Icon={TriangleAlert} hover={"Alertas"} />
                 </Link>
             </div>

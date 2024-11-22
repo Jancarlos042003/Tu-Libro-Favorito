@@ -127,7 +127,7 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
                 <table className="w-full">
                     <thead>
                         <tr className="border-b border-gray-200">
-                        <th className="text-left py-3 px-4">Nombre</th>
+                        <th className="text-left py-3 px-4">Libro</th>
                         <th className="text-left py-3 px-4">Autor</th>
                         <th className="text-left py-3 px-4">Stock</th>
                         <th className="text-left py-3 px-4">Acciones</th>
