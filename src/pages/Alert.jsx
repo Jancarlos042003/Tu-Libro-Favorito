@@ -19,7 +19,6 @@ const Alert = () => {
             }
         })
         .then((resp) => {
-            console.log(resp)
             setData(resp.data)
         })
         .catch((e) => {
@@ -33,7 +32,6 @@ const Alert = () => {
 
     // ESTABLECER LA CANTIDAD MINIMA DE STOCK
     const stockBajo = data.filter(d => d.stock <= 10)
-    console.log(stockBajo)
 
     if(loading) return <Loader />
 

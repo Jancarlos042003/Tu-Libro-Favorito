@@ -32,8 +32,6 @@ const CreateInventary = ({ inventario }) => {
             }
 
             setResultados(librosEncontrados);
-
-            console.log(librosEncontrados)
         } catch (error) {
             console.error("Error al buscar libros:", error);
         }
