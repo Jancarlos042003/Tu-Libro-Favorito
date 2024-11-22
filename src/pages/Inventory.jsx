@@ -1,32 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BooksInventory from "../components/form/BooksInventory"
 import CreateInventary from "../components/form/CreateInventory"
+import { API_URL } from "../../env";
+import axios from "axios";
+import { token } from "../helpers/auth";
+import Loader from "../components/atoms/Loader";
 
 const Inventory = () => {
-    const [libros, setLibros] = useState([
-    { id: 1, nombre: 'Don Quijote', autor: 'Miguel de Cervantes', stock: 10 },
-    { id: 2, nombre: '1984', autor: 'George Orwell', stock: 20 },
-    ]);
 
-    const agregarLibro = (nuevoLibro) => {
-    const nuevoId = Math.max(...libros.map(l => l.id), 0) + 1;
-    setLibros([...libros, { id: nuevoId, ...nuevoLibro }]);
+    const [inventario, setInventario] = useState([])
+    const [error, setError] = useState()
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        setLoading(true)
+
+        axios.get(`${API_URL}/api/inventario`, {
+            headers: {
+                Authorization: `Bearer ${token()}`
+            }
+        })
+        .then((resp) => {
+            setInventario(resp.data)
+        })
+        .catch((e) => {
+            setError("Error: " + e)
+            console.log(error)
+        })
+        .finally(() => {
+            setLoading(false)
+        })
+    }, []); 
+
+    // Función para actualizar el estado después de actualizar un stock
+    const handleUpdateSuccess = (updatedItem) => {
+        setInventario(prevData => 
+            prevData.map(item => 
+                item.id === updatedItem.id ? updatedItem : item
+            )
+        );
     };
 
-    const actualizarStock = (id, nuevoStock) => {
-    setLibros(libros.map(libro => 
-        libro.id === id ? { ...libro, stock: nuevoStock } : libro
-    ));
-    };
+    if(loading) return <Loader />
 
     return (
-    <div>
-        <CreateInventary onAgregarLibro={agregarLibro} />
-        <BooksInventory
-        libros={libros} 
-        onActualizarStock={actualizarStock}
-        />
-    </div>
+        <div className="py-4">
+            <CreateInventary inventario={inventario} />
+            <BooksInventory data={inventario} onUpdateSuccess={handleUpdateSuccess} />
+        </div>
     );
 }
 

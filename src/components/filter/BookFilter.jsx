@@ -5,8 +5,6 @@ import useFetch from "../../hooks/useFetch";
 import Loader from "../atoms/Loader";
 
 const BookFilter = ( { filtros, setFiltros, libros, actualizarLibrosFiltrados } ) => {
-    console.log(libros)
-
     const [isOpen, setIsOpen] = useState(false);
     const toggleFilters = () => setIsOpen(!isOpen);
 
