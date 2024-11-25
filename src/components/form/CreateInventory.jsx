@@ -4,8 +4,7 @@ import axios from 'axios';
 import { token } from '../../helpers/auth';
 import { Search } from 'lucide-react';
 
-const CreateInventary = ({ inventario }) => {
-
+const CreateInventary = ({ inventario, setInventario }) => {
     const [termino, setTermino] = useState("");
     const [resultados, setResultados] = useState([]);
 
@@ -71,8 +70,9 @@ const CreateInventary = ({ inventario }) => {
                 Authorization: `Bearer ${token()}`
             }
         })
-        .then(() => {
+        .then((resp) => {
             alert("Inventario creado exitosamente.")
+            setInventario([...inventario, resp.data]) // Actualizamos para que el nuevo inventario agregado se muestre en el front
             
             // Resetear todos los campos
             setTermino("");

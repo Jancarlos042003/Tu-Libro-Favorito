@@ -45,7 +45,7 @@ const Inventory = () => {
 
     return (
         <div className="py-4">
-            <CreateInventary inventario={inventario} />
+            <CreateInventary inventario={inventario} setInventario={setInventario} />
             <BooksInventory data={inventario} onUpdateSuccess={handleUpdateSuccess} />
         </div>
     );
