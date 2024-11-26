@@ -16,14 +16,16 @@ const CartReducer = (state, action) => {
             return {cart: []}
 
         case "INCREMENT_QUANTITY":
-            return {...state, cart: state.cart.map(item =>
-                    item.id === action.payload.id
+            return {
+                ...state, 
+                cart: state.cart.map(item =>
+                    item.id === action.payload.id && item.quantity < action.payload.stock
                         ? { ...item, quantity: item.quantity + 1 }
                         : item
                 )
             };
         
-        case "DECREMENT_QUANTITY":
+        case "DECREMENT_QUANTITY":  
             return {...state, cart: state.cart.map(item =>
                     item.id === action.payload.id && item.quantity > 1
                         ? { ...item, quantity: item.quantity - 1 }

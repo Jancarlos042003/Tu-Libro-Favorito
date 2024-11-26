@@ -9,7 +9,7 @@ import { CartContext } from "../../context/CartContext";
 const PayPalPayment = ({ orden }) => {
     const [error, setError] = useState(null);
     const nav = useNavigate()
-    const { dispatch } = useContext(CartContext)
+    const { state, dispatch } = useContext(CartContext)
 
     const handleApprove = async () => {
         try {
@@ -24,6 +24,49 @@ const PayPalPayment = ({ orden }) => {
             );
 
             if (response.data.estado === "COMPLETED") {
+                // Promesa para actualizar el inventario de cada libro
+                const updateInventoryPromises = state.cart.map(async (item) => {
+                    try {
+                        // Primero, obtener el ID del inventario por ISBN
+                        const inventoryResponse = await axios.get(
+                            `${API_URL}/api/inventario/${item.isbn}`, 
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${token()}`
+                                }
+                            }
+                        );
+
+                        // Verificar si se encontró el inventario
+                        if (inventoryResponse.data) {
+                            // Actualizar el inventario restando la cantidad comprada
+                            const updateResponse = await axios.put(
+                                `${API_URL}/api/inventario/${inventoryResponse.data[0].id}`,
+                                {
+                                    stock: inventoryResponse.data[0].stock - item.quantity  // Restar la cantidad comprada
+                                },
+                                {
+                                    headers: {
+                                        Authorization: `Bearer ${token()}`
+                                    }
+                                }
+                            );
+
+                            return updateResponse.data;
+                        } else {
+                            console.error(`No se encontró inventario para ISBN: ${item.isbn}`);
+                            return null;
+                        }
+                    } catch (inventoryError) {
+                        console.error(`Error actualizando inventario para ISBN ${item.isbn}:`, inventoryError);
+                        return null;
+                    }
+                });
+
+                // Esperar a que se actualicen todos los inventarios
+                await Promise.allSettled(updateInventoryPromises);
+
+                // Navegar y limpiar carrito
                 nav("/orden-completada")
                 dispatch({ type: "CLEAR_CART" });
                 

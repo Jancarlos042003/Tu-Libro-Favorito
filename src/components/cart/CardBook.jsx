@@ -1,19 +1,47 @@
 import { Trash2 } from "lucide-react";
 import { CartContext } from "../../context/CartContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { token } from "../../helpers/auth";
+import { API_URL } from "../../../env";
 
-const CardBook = ({libro}) => {
+const CardBook = ({ libro }) => {
+
     //const [quantity, setQuantity] = useState(1);
     const { state, dispatch } = useContext(CartContext)
+    const [inventario, setInventario] = useState([])
+    const [error, setError] = useState()
 
     // Buscar si el libro ya está en el carrito y obtener su cantidad actual
     const bookInCart = state.cart.find(item => item.id === libro.id);
     const quantity = bookInCart ? bookInCart.quantity : 0;
 
+    // OBTENEMOS TODO EL INVENTARIO
+    useEffect(() => {
+        axios.get(`${API_URL}/api/inventario`, {
+            headers: {
+                Authorization: `Bearer ${token()}`
+            }
+        })
+        .then((resp) => {
+            setInventario(resp.data)
+        })
+        .catch((e) => {
+            setError("Error: " + e)
+            console.log(error)
+        })
+    }, []); 
+
+    // FILTRAMOS EL INVENTARIO QUE COINCIDA CON EL ID DEL LIBRO
+    const filterInventory = inventario.filter(i => i.libro.id == libro.id)
+
     const handleIncrement = () => {
         dispatch({
             type: "INCREMENT_QUANTITY",
-            payload: { id: libro.id }
+            payload: { 
+                id: libro.id,
+                stock: filterInventory[0].stock // establecemos como maximo el stock disponible
+            }
         })
     };
 

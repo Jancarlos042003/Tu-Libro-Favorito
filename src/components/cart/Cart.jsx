@@ -2,7 +2,7 @@ import { ShoppingCart, X } from "lucide-react"
 import CardBook from "./CardBook";
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { token } from "../../helpers/auth";
 import Warning from "../atoms/Warning";
 
