@@ -148,7 +148,7 @@ const Checkout = () => {
                     onClick={handleClick}
                     className="bt-black flex justify-center items-center gap-3 mt-5">
                         <ArrowLeft size={20} />
-                        Volver a al Tienda
+                        Volver a la Tienda
                     </button>
                 </div>
                 
