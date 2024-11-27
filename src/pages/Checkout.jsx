@@ -6,6 +6,8 @@ import { API_URL } from "../../env"
 import { token } from "../helpers/auth"
 import { UserContext } from "../context/UserContext"
 import PayPalPayment from "../components/cart/PayPalPayment"
+import { useNavigate } from "react-router-dom"
+import { ArrowLeft } from "lucide-react"
 
 const Checkout = () => {
 
@@ -23,6 +25,12 @@ const Checkout = () => {
 
     // ESTADO PARA EL TOTAL
     const [total, setTotal] = useState(0);
+
+    const nav = useNavigate()
+
+    const handleClick = () => {
+        nav("/")
+    }
 
     // Función para calcular el total del carrito
     useEffect(() => {
@@ -92,40 +100,58 @@ const Checkout = () => {
                     <CardBook key={libro.id} libro={libro} />
                 ))}
             </div>
-            <div className="mt-8">
-                <h2 className="text-xl font-bold">Información de Envío</h2>
-                <input 
-                    className="border border-gray-300 rounded-lg w-full py-2 px-2 mt-3" 
-                    type="text" 
-                    name="direccion" 
-                    placeholder="Dirección de Envío"
-                    value={direccion} 
-                    onChange={(e) => setDireccion(e.target.value)}
-                    required  
-                />
-                <input 
-                    className="border border-gray-300 rounded-lg w-full py-2 px-2 mt-3" 
-                    type="tel" 
-                    name="celular" 
-                    placeholder="Número de Celular"
-                    value={telefono} 
-                    onChange={(e) => setTelefono(e.target.value)}  
-                    required
-                />
-            </div>
-            <div className="mt-8 flex justify-between items-center">
-                <h2 className="text-xl font-bold">Total</h2>
-                <span className="text-xl">${total}</span>
-            </div>
-            {!orden ? (<button 
-                className="mt-8 bt-black"
-                onClick={handleOrden}
-                >
-                    Realizar Pedido
-                </button>) : (
-                <div className="mt-8">
-                    <PayPalPayment value={total} orden={orden} />
+            {state.cart.length > 0 && (
+                <>
+                    <div className="mt-8">
+                        <h2 className="text-xl font-bold">Información de Envío</h2>
+                        <input 
+                            className="border border-gray-300 rounded-lg w-full py-2 px-2 mt-3" 
+                            type="text" 
+                            name="direccion" 
+                            placeholder="Dirección de Envío"
+                            value={direccion} 
+                            onChange={(e) => setDireccion(e.target.value)}
+                            required  
+                        />
+                        <input 
+                            className="border border-gray-300 rounded-lg w-full py-2 px-2 mt-3" 
+                            type="tel" 
+                            name="celular" 
+                            placeholder="Número de Celular"
+                            value={telefono} 
+                            onChange={(e) => setTelefono(e.target.value)}  
+                            required
+                        />
+                    </div>
+                    <div className="mt-8 flex justify-between items-center">
+                        <h2 className="text-xl font-bold">Total</h2>
+                        <span className="text-xl">${total}</span>
+                    </div>
+                    {!orden ? (
+                        <button 
+                            className="mt-8 bt-black"
+                            onClick={handleOrden}
+                        >
+                            Realizar Pedido
+                        </button>
+                    ) : (
+                        <div className="mt-8">
+                            <PayPalPayment value={total} orden={orden} />
+                        </div>
+                    )}
+                </>
+            )}
+            {state.cart.length === 0 && (
+                <div className="mt-8 text-center text-gray-500">
+                    Su carrito está vacío
+                    <button 
+                    onClick={handleClick}
+                    className="bt-black flex justify-center items-center gap-3 mt-5">
+                        <ArrowLeft size={20} />
+                        Volver a al Tienda
+                    </button>
                 </div>
+                
             )}
         </div>
     )
