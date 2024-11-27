@@ -18,11 +18,16 @@ const Home = () => {
         <div className="min-h-screen flex flex-col">
             <main className="flex-grow">
                 <BannerCarousel />
-                {categorias.map(c => (
-                    <div key={c.id} className='container mx-auto'>
-                        <SectionBooks titulo={c.nombre} idCategoria={c.id} libros={FilterCategory(libros, c.nombre)} />
-                    </div>
-                ))}
+                {categorias.map(c => { 
+                    // Limite de 15 libros por categoria
+                    const limitedLibros = FilterCategory(libros, c.nombre).slice(0, 15);
+
+                    return(
+                        <div key={c.id} className='container mx-auto'>
+                            <SectionBooks titulo={c.nombre} idCategoria={c.id} libros={limitedLibros} />
+                        </div>
+                    )
+                })}
             </main>
         </div>
     );
