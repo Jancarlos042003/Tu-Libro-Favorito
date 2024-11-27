@@ -19,8 +19,8 @@ const Home = () => {
             <main className="flex-grow">
                 <BannerCarousel />
                 {categorias.map(c => { 
-                    // Limite de 15 libros por categoria
-                    const limitedLibros = FilterCategory(libros, c.nombre).slice(0, 15);
+                    // Limite de 10 libros por categoria
+                    const limitedLibros = FilterCategory(libros, c.nombre).slice(0, 12);
 
                     return(
                         <div key={c.id} className='container mx-auto'>
