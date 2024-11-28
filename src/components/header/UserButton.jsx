@@ -45,6 +45,7 @@ const UserButton = ({
                 <button
                     onClick={setIsUserMenuOpen}
                     className="flex items-center focus:outline-none"
+                    name="usuario"
                 >
                     <UserRound size={25} className="mr-2" strokeWidth={2.5} />
                 </button>
