@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Search, Menu, X, UserRound, MapPinHouse, LogOut } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import SearchBar from './SearchBar'
@@ -7,9 +7,13 @@ import { deleteToken, token } from '../../helpers/auth'
 import Cart from '../cart/Cart'
 import CartIcon from '../cart/CartIcon'
 import UserButton from './UserButton'
+import { UserContext } from '../../context/UserContext'
 
 
 const NavigationBar = () => {
+
+    const { logout } = useContext(UserContext)
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -20,7 +24,7 @@ const NavigationBar = () => {
     }, []);
 
     const handleLogout = () => {
-        deleteToken()
+        logout()
         setIsAuthenticated(false);
         setIsUserMenuOpen(false);
         nav("/")

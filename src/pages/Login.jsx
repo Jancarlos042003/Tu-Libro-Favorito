@@ -5,13 +5,15 @@ import SendButton from "../components/review/SendButtom"
 import axios from 'axios';
 import { API_URL } from "../../env";
 import { setToken } from "../helpers/auth";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
 
     const nav = useNavigate()
 
     const [error, setError] = useState(null)
+    const { login } = useContext(UserContext); // Usar login desde el contexto
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -24,7 +26,10 @@ const Login = () => {
         axios
             .post(`${API_URL}/login`, data) // Enviamos la petición
             .then((resp) => {               // Obtenemos la respuesta
-                setToken(resp.data.token);
+                
+                login(resp.data.token); // Guardar token y actualizar contexto
+
+                console.log(resp.data)
                 
                 //Obtenemos el rol del usuario
                 const roles = resp.data.roles;
