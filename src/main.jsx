@@ -7,9 +7,9 @@ import { UserProvider } from './context/UserContext'
 
 
 createRoot(document.getElementById('root')).render(
-  <CartProvider>
-    <UserProvider>
-      <RouterProvider router={router} />
-    </UserProvider>
-  </CartProvider>
+  <UserProvider>
+    <CartProvider>
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+    </CartProvider>
+  </UserProvider>
 )
