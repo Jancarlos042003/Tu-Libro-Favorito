@@ -33,7 +33,7 @@ const CardBook = ({ libro }) => {
     }, []); 
 
     // FILTRAMOS EL INVENTARIO QUE COINCIDA CON EL ID DEL LIBRO
-    const filterInventory = inventario.filter(i => i.libro.id == libro.id)
+    const filterInventory = inventario.filter(i => i.libroCardDTO.id == libro.id)
 
     const handleIncrement = () => {
         dispatch({
