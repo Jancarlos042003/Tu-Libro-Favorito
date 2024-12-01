@@ -6,7 +6,8 @@ import { token } from '../../helpers/auth';
 
 const BooksInventory = ({ data, onUpdateSuccess }) => {
     const [editando, setEditando] = useState(null);
-    const [stockEditado, setStockEditado] = useState(null);
+    const [entradaEditado, setEntradaEditado] = useState(null);
+    const [loteEditado, setLoteEditado] = useState(null);
     const [termino, setTermino] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [resultados, setResultados] = useState([]);
@@ -14,13 +15,15 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
 
     const iniciarEdicion = (inventario) => {
         setEditando(inventario.id);
-        setStockEditado(inventario.stock);
+        setEntradaEditado(inventario.entrada);
+        setLoteEditado(inventario.numLote);
     };
 
 
     const cancelarEdicion = () => {
         setEditando(null);
-        setStockEditado(null);
+        setEntradaEditado(null);
+        setLoteEditado(null)
     };
 
 
@@ -65,8 +68,12 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
 
     const guardarCambios = (id) => {
         const newData = {
-            idLibro: editando,
-            stock: stockEditado
+            libroCardDTO: {
+                id: editando
+            },
+            entrada: entradaEditado,
+            salida: 0,
+            numLote: loteEditado
         }
 
         axios.put(`${API_URL}/api/inventario/${id}`, newData, {
@@ -76,11 +83,11 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
         })
         .then((resp) => {
             alert("Stock actualizado exitosamente.")
-
             onUpdateSuccess(resp.data); // Actualiza el estado del padre
 
             setEditando(null);
-            setStockEditado(null);
+            setEntradaEditado(null);
+            setLoteEditado(null);
         })
         .catch((error) => {
             console.error('Error completo:', error);
@@ -94,7 +101,7 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
 
     // Filtra los elementos de 'data' cuyo 'libro.id' está en 'idsResultados'
     const inventariosConIdsEnData = busquedaActiva
-    ? data.filter(inventario => idsResultados.includes(inventario.libro.id))
+    ? data.filter(inventario => idsResultados.includes(inventario.libroCardDTO.id))
     : [];
 
     // Mostrar data completa si no hay búsqueda activa
@@ -127,16 +134,21 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
                 <table className="w-full">
                     <thead>
                         <tr className="border-b border-gray-200">
-                        <th className="text-left py-3 px-4">Libro</th>
-                        <th className="text-left py-3 px-4">Autor</th>
-                        <th className="text-left py-3 px-4">Stock</th>
-                        <th className="text-left py-3 px-4">Acciones</th>
+                            <th className="text-left py-3 px-4">Libro</th>
+                            <th className="text-left py-3 px-4">Autor</th>
+                            <th className="text-left py-3 px-4">Stock</th>
+                            <th className="text-left py-3 px-4">Entrada</th>
+                            <th className="text-left py-3 px-4">Salida</th>
+                            <th className="text-left py-3 px-4">Estado</th>
+                            <th className="text-left py-3 px-4">Fecha creación</th>
+                            <th className="text-left py-3 px-4">N° Lote</th>
+                            <th className="text-left py-3 px-4">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {isLoading ? (
                             <tr>
-                                <td colSpan="4" className="py-20">
+                                <td colSpan="9" className="py-20">
                                     <div className="flex justify-center items-center">
                                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-neutral-800"></div>
                                         <span className="ml-2">Buscando...</span>
@@ -147,19 +159,35 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
                             <>
                                 {displayData.map(inventario => (
                                     <tr key={inventario.id} className="border-b border-gray-100 hover:bg-gray-50">
-                                        <td className="py-3 px-4">{inventario.libro.titulo}</td>
-                                        <td className="py-3 px-4">{inventario.libro.autor}</td>
+                                        <td className="py-3 px-4">{inventario.libroCardDTO.titulo}</td>
+                                        <td className="py-3 px-4">{inventario.libroCardDTO.autor}</td>
+                                        <td className="py-3 px-4">{inventario.stock}</td>
                                         <td className="py-3 px-4">
                                             {editando === inventario.id ? (
                                                 <input
                                                 type="number"
-                                                value={stockEditado}
-                                                onChange={(e) => setStockEditado(parseInt(e.target.value))} // Se actualiza el stock
+                                                value={entradaEditado}
+                                                onChange={(e) => setEntradaEditado(parseInt(e.target.value))} // Se actualiza cantidad incial del stock(Entrada)
                                                 min="0"
                                                 className="w-20 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 />
                                             ) : (
-                                                inventario.stock
+                                                inventario.entrada
+                                            )}
+                                        </td>
+                                        <td className="py-3 px-4">{inventario.salida}</td>
+                                        <td className="py-3 px-4">{inventario.agotado ? "Sin stock" : "Con stock"}</td>
+                                        <td className="py-3 px-4">{inventario.fechaCreacion}</td>
+                                        <td className="py-3 px-4">
+                                            {editando === inventario.id ? (
+                                                <input
+                                                type="text"
+                                                value={loteEditado}
+                                                onChange={(e) => setLoteEditado(e.target.value)} // Se actualiza el lote
+                                                className="w-20 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                />
+                                            ) : (
+                                                inventario.numLote
                                             )}
                                         </td>
                                         <td className="py-3 px-4">

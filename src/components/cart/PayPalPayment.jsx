@@ -42,8 +42,9 @@ const PayPalPayment = ({ orden }) => {
                             // Actualizar el inventario restando la cantidad comprada
                             const updateResponse = await axios.put(
                                 `${API_URL}/api/inventario/${inventoryResponse.data[0].id}`,
-                                {
-                                    stock: inventoryResponse.data[0].stock - item.quantity  // Restar la cantidad comprada
+                                {   
+                                    entrada: inventoryResponse.data[0].entrada, // Asigno la entrada que recibi en la busqueda del inventario por el ISBN
+                                    salida: item.quantity // Se asigna la cantidad del libro que se va a vender
                                 },
                                 {
                                     headers: {

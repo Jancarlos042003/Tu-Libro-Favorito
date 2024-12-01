@@ -50,7 +50,7 @@ const CreateInventary = ({ inventario, setInventario }) => {
         e.preventDefault();
 
         // Verificar si hay resultados y si el libro ya existe en el inventario
-        if (inventario.some(item => item.libro.id === resultados[0].id)) {
+        if (inventario.some(item => item.libroCardDTO.id === resultados[0].id)) {
             alert("Este libro ya existe en el inventario.");
 
             // Resetear todos los campos
@@ -61,8 +61,12 @@ const CreateInventary = ({ inventario, setInventario }) => {
         }
 
         const data = {
-            idLibro: resultados[0].id,
-            stock: e.target.stock.value
+            libroCardDTO: {
+                id: resultados[0].id
+            },
+            stock: e.target.stock.value,
+            entrada: e.target.stock.value,
+            numLote: e.target.lote.value
         }
         
         axios.post(`${API_URL}/api/inventario`, data, {
@@ -137,8 +141,18 @@ const CreateInventary = ({ inventario, setInventario }) => {
                     <input
                     type="number"
                     name='stock'
-                    placeholder="Stock"
+                    placeholder="Cantidad inicial"
                     min="1"
+                    required
+                    className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-800"
+                    />
+                </div>
+
+                <div className="flex flex-col">
+                    <input
+                    type="text"
+                    name='lote'
+                    placeholder="N° Lote"
                     required
                     className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-800"
                     />
@@ -148,7 +162,7 @@ const CreateInventary = ({ inventario, setInventario }) => {
                     type="submit"
                     title='agregar'
                     disabled={resultados.length > 0 ? false : true}
-                    className="w-auto bg-black text-white py-2 px-4 rounded-md hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-800"
+                    className="w-auto bg-black text-white py-2 px-4 rounded-md hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-800 cursor-pointer"
                 >
                     Agregar
                 </button>
