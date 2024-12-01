@@ -27,11 +27,11 @@ const PriceDisplay = ({ price, discount, fontSize = 'base' }) => {
         <div className={`${fontSizeClass} flex flex-col`}>
             {discount > 0 && (
                 <span className={`line-through text-gray-500 mr-2 ${smallerFontSizeClass}`}>
-                S/.{price.toFixed(2)}
+                ${price.toFixed(2)}
                 </span>
             )}
             <span className={`font-bold ${discount > 0 ? 'text-red-600' : 'text-gray-800'}`}>
-                S/.{discountedPrice}
+                ${discountedPrice}
             </span>
         </div>
     );
