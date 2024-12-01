@@ -42,7 +42,7 @@ const Alert = () => {
             </h1>
 
             {stockBajo.length > 0 ? (
-                stockBajo.map(s => <StockAlert key={s.id} libro={s.libro} stock={s.stock} />)
+                stockBajo.map(s => <StockAlert key={s.id} libro={s.libroCardDTO} stock={s.stock} />)
             ) : (
                 <div className="text-black my-10">
                     ¡Buenas noticias 😊! Todos los libros tienen un stock adecuado.
