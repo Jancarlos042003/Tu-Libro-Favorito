@@ -35,7 +35,7 @@ const BookFilter = ( { filtros, setFiltros, libros, actualizarLibrosFiltrados } 
                 nuevosFiltros.autores.includes(libro.autor);
             const editorialCoincide = 
                 !nuevosFiltros.editoriales.length || 
-                nuevosFiltros.editoriales.includes(libro.editorial?.nombre);
+                nuevosFiltros.editoriales.includes(libro.editorial);
             return autorCoincide && editorialCoincide;
         });
     
