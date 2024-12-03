@@ -13,6 +13,7 @@ import Checkout from "../pages/Checkout";
 import OrderCompleted from "../pages/OrderCompleted";
 import ContentCategory from "../pages/ContentCategory";
 import Alert from "../pages/Alert";
+import SearchResults from "../components/header/SearchResults";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
                 path: "categoria/:id",
                 element: <ContentCategory />,
             },
+            {
+                path: "buscar",
+                element: <SearchResults />, // Ruta para manejar las búsquedas
+            },
+            
         ],
     },
     {
