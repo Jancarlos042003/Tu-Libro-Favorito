@@ -27,6 +27,7 @@ const SearchResults = () => {
 
     return (
         <div>
+            <Navigation />
             {
                 libros.length === 0 ? (
                     <div className='w-full h-full mt-16 flex items-center justify-center'>
@@ -34,7 +35,6 @@ const SearchResults = () => {
                     </div>
                 ) : (
                     <div>
-                        <Navigation />
                         <div className='container mx-auto mt-5'>
                             <h1 className="text-2xl text-black font-bold">Resultados para: {query}</h1>
                         </div>
