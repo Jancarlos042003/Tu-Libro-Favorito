@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import useBookSearch from './useBookSearch';
+import useBookSearch from '../../hooks/useBookSearch';
 import Loader from '../atoms/Loader';
 import Navigation from './Navigation';
 import BookFilter from '../filter/BookFilter';
