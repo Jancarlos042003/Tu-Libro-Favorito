@@ -187,7 +187,7 @@ const CreateBook = () => {
         e.preventDefault()
         const data = {
             titulo: e.target.titulo.value,
-            autoresIds: e.target.autor.value,
+            autor: e.target.autor.value,
             fechaPublicacion: e.target.fechaPublicacion.value,
             editorialId: parseInt(selectedEditorial),
             isbn: e.target.isbn.value,
@@ -198,7 +198,7 @@ const CreateBook = () => {
             vistaPrevia: e.target.vistaPrevia.value,
             imgPortada: e.target.imgPortada.value,
             imgSubportada: e.target.imgSubportada.value,
-            categoriasIds: selectedCategories.map(category => category.id)
+            categorias: selectedCategories.map(category => category.id)
         }
 
         // CONDICIONAL PARA VER QUE TIPO PETICION
