@@ -157,7 +157,7 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
                             </tr>
                         ) : (
                             <>
-                                {displayData.map(inventario => (
+                                {displayData.length > 0 ? displayData.map(inventario => (
                                     <tr key={inventario.id} className="border-b border-gray-100 hover:bg-gray-50">
                                         <td className="py-3 px-4">{inventario.libroCardDTO.titulo}</td>
                                         <td className="py-3 px-4">{inventario.libroCardDTO.autor}</td>
@@ -219,10 +219,16 @@ const BooksInventory = ({ data, onUpdateSuccess }) => {
                                         )}
                                         </td>
                                     </tr>
-                                ))}
+                                )) : 
+                                    <tr>
+                                        <td colSpan="9" className="py-20 px-4 text-center font-bold text-gray-600">
+                                            El inventario esta vacío.
+                                        </td>
+                                    </tr>
+                                }
                                 {busquedaActiva && inventariosConIdsEnData.length === 0 && (
                                     <tr>
-                                        <td colSpan="4" className="py-20 px-4 text-center font-bold text-gray-600">
+                                        <td colSpan="9" className="py-20 px-4 text-center font-bold text-gray-600">
                                             No se encontraron resultados para "{termino}"
                                         </td>
                                     </tr>
