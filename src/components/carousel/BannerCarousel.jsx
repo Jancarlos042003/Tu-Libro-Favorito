@@ -38,7 +38,7 @@ const BannerCarousel2 = () =>{
             spaceBetween={0}
             slidesPerView = {1}
             autoplay = {{ delay: 4000, disableOnInteraction: false }}
-            className="overflow-hidden w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-gray-900"
+            className="w-full h-[550px] sm:h-[700px]"
         >
             {libros.map((libro) => (
                 <SwiperSlide key={libro.id}>
