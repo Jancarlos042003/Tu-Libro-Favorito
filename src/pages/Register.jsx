@@ -23,7 +23,7 @@ const Register = () => {
         axios
             .post(`${API_URL}/api/usuario/registrar`, data)
             .then((response) => {nav("/login")})
-            .catch(setError("Error al registrarse.")) // Cambiar por en mensaje de error específico que envia backend
+            .catch((error) => setError("Error al registrarse.")) // Cambiar por en mensaje de error específico que envia backend
     }
 
     return (

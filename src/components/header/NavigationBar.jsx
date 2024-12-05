@@ -42,10 +42,10 @@ const NavigationBar = () => {
     };
 
     return (
-        <div>
-            <nav className="bg-black text-white">
+        <>
+            <nav className='text-white transition-all duration-300 ease-in-out bg-black' >
                 <div className="container mx-auto px-4">
-                    <div className="flex items-center justify-between py-4">
+                    <div className="flex items-center justify-between py-5">
                         <Logo />
                         <div className="hidden md:flex items-center space-x-6">
                             <SearchBar />
@@ -108,7 +108,7 @@ const NavigationBar = () => {
                 )}
             </nav>
             {isCartOpen && <Cart onClose={closeCart} />}
-        </div>
+        </>
     );
 };
 

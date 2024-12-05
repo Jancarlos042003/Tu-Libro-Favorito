@@ -4,7 +4,6 @@ import { Lock, Mail } from 'lucide-react'
 import SendButton from "../components/review/SendButtom"
 import axios from 'axios';
 import { API_URL } from "../../env";
-import { setToken } from "../helpers/auth";
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 
@@ -29,8 +28,6 @@ const Login = () => {
                 
                 login(resp.data.token); // Guardar token y actualizar contexto
 
-                console.log(resp.data)
-                
                 //Obtenemos el rol del usuario
                 const roles = resp.data.roles;
 
@@ -41,9 +38,9 @@ const Login = () => {
                     nav("/"); // Página de inicio para usuarios regulares
                 }
             })
-            .catch(() => {             // Si el login es incorrecto 
-                setError("Contraseña o email inválido.")
-            })
+            .catch(              // Si el login es incorrecto 
+                () => setError("Contraseña o email inválido.")
+            )
             
     } 
 

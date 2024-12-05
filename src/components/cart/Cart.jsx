@@ -15,9 +15,9 @@ const Cart = ({onClose}) => {
     const handleClick = () => {
         if (token()) {
             nav("/checkout")
+        } else {
+            setShowWarning(true)
         }
-
-        setShowWarning(true)
     }
 
     return(
